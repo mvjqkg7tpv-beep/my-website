@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コダックの定理 — 詳細解説版</title>
+<title>コダックの定理 — 記号と式の解説</title>
 <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
@@ -15,7 +15,7 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 20px;
-    line-height: 1.7;
+    line-height: 1.8;
 }
 h1, h2, h3 {
     color: #222;
@@ -48,6 +48,19 @@ pre {
     border-radius: 8px;
     margin: 15px 0;
 }
+.symbols {
+    background: #f9f9f9;
+    border-left: 5px solid #5cb85c;
+    padding: 15px;
+    margin: 15px 0;
+}
+.symbols ul {
+    list-style: none;
+    padding-left: 0;
+}
+.symbols li {
+    margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
@@ -58,42 +71,30 @@ pre {
   \]
 </h1>
 
-<h2>指を使った直感的理解</h2>
-<p>
-  n ビットを指で表すと、指数関数的な増加が直感的にわかります：
-</p>
-<div class="example">
-<p><strong>指3本</strong> → 2進数: <code>0111</code> → 十進数: <strong>7</strong>  
-<br>指数関数: <strong>2³ = 8</strong></p>
-
-<p><strong>指2本</strong> → 2進数: <code>0011</code> → 十進数: <strong>3</strong>  
-<br>指数関数: <strong>2² = 4</strong></p>
-
-<p>まとめると、<code>2^n = 指で表した2進数の数値 + 1</code> という直感的対応が見えます。</p>
+<h2>記号の意味と見方</h2>
+<div class="symbols">
+<ul>
+<li><strong>\(\Delta\)</strong>：差分や変化量を表す記号。ここでは「最大値からの差分」を象徴。</li>
+<li><strong>2^n</strong>：nビットで表現できる全ての状態数。情報理論では「情報量の総数」を意味。</li>
+<li><strong>−1</strong>：十進数で最大値を表す際の補正。最大値 = 状態数 − 1。</li>
+<li><strong>\(\sum_{k=0}^{n} 2^k\)</strong>：各ビットの指数的寄与を累積した合計。組合せ論的には「n個の独立した0/1選択肢の総和」。</li>
+<li><strong>k</strong>：累積するビット位置のインデックス（0からnまで）。</li>
+<li><strong>n</strong>：ビット数。ここでは「整数を表現するために使用するビットの総数」を意味。</li>
+</ul>
 </div>
 
-<h2>コダックの定理 — 厳密解説</h2>
+<h2>式の解説</h2>
 <p>
-  n ビットで表せる状態数は <strong>2^n</strong>、  
-  最大値は <strong>2^n − 1</strong> です。
+この式は、nビットで表現できる状態数および最大値の構造を数学的に表現したものである。  
+左辺の \(\Delta(2^n-1)\) は最大値に対応する差分量を象徴し、右辺の \(\sum_{k=0}^{n} 2^k - 1\) は各ビット位置の値を累積した合計として解釈できる。
 </p>
 
-<h3>状態数の導出</h3>
+<h2>直感的理解の例</h2>
 <p>
-  1ビットで取れる値は 0/1 の2通り。  
-  2ビットなら 00, 01, 10, 11 の4通り。  
-  一般化すると、n ビットで表現できる状態数は <strong>2^n</strong> です。
+指や具体的な2進数パターンを使うと、指数関数と最大値の関係を直感的に理解できる。
 </p>
-
-<h3>最大値の考え方</h3>
-<p>
-  全てのビットが1のパターンは、十進数で <strong>2^n − 1</strong>。  
-  例: 3ビット → 111 = 7 = 2³ − 1
-</p>
-
-<h3>小さな例で確認</h3>
 <div class="example">
-<h4>3ビットの場合</h4>
+<h3>3ビットの場合</h3>
 <pre><code>
 000 = 0
 001 = 1
@@ -104,10 +105,11 @@ pre {
 110 = 6
 111 = 7
 </code></pre>
+<p>最大値 111（二進数） = 7 = 2^3 − 1。指数関数 2^3 = 8 と比較すると「最大値 + 1 = 状態数」という関係が確認できる。</p>
 </div>
 
 <div class="example">
-<h4>4ビットの場合</h4>
+<h3>4ビットの場合</h3>
 <pre><code>
 0000 = 0
 0001 = 1
@@ -128,30 +130,17 @@ pre {
 </code></pre>
 </div>
 
-<h2>応用・関連理論</h2>
-<h3>情報理論</h3>
+<h2>応用・解釈</h2>
 <p>
-  n ビットで表せる状態数 = 2^n は情報量の単位ビット(bit)の基本概念と直結します。
-</p>
-
-<h3>組合せ論</h3>
-<p>
-  n 個の0/1選択肢がある場合の組み合わせ総数 = 2^n。  
-  コダックの定理は、組合せ論的な視点でも理解できます。
-</p>
-
-<h3>コンピュータ実装</h3>
-<p>
-  プログラミングでは n ビット整数型の最大値 = 2^n − 1。  
-  オーバーフローの計算やビット演算を考えるときの基礎です。
+この式は単なる計算式ではなく、情報理論・組合せ論・整数表現の観点を統合している。  
+情報理論ではビット数と状態数の関係、組合せ論では0/1選択肢の総和、コンピュータ実装では整数型の最大値として解釈できる。
 </p>
 
 <h2>まとめ</h2>
 <ul>
-<li>状態数 = 2^n</li>
-<li>最大値 = 2^n − 1</li>
-<li>情報理論、組合せ論、コンピュータ表現の基礎原理に直結</li>
-<li>指での直感的理解 → Δ(2^n−1)=Σ(2^k−1) で数式的に表現可能</li>
+<li>Δ(2^n−1) = Σ(2^k−1) は nビット整数の最大値構造を象徴的に表す</li>
+<li>各記号はそれぞれ差分、状態数、指数的寄与を表しており、直感・理論・応用の三層で理解できる</li>
+<li>具体例（3ビット、4ビット）により直感的理解が可能</li>
 </ul>
 
 </body>
