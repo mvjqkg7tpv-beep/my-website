@@ -3,136 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>超濃密解説ページ</title>
+<title>コダックの定理 — 超濃密解説</title>
 <style>
-    /* 基本レイアウト */
-    body {
-        background-color: white;
-        color: #111;
-        font-family: 'Helvetica', 'Arial', sans-serif;
-        line-height: 1.7;
-        margin: 0;
-        padding: 20px;
-    }
-
-    h1, h2, h3 {
-        color: #222;
-        margin-top: 40px;
-    }
-
-    p {
-        margin-bottom: 20px;
-        font-size: 16px;
-    }
-
-    a {
-        color: #0066cc;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-        border-left: 5px solid #555;
-        overflow-x: auto;
-        font-size: 14px;
-    }
-
-    section {
-        max-width: 900px;
-        margin: auto;
-    }
-
-    img {
-        max-width: 100%;
-        display: block;
-        margin: 20px 0;
-    }
-
-    /* ボタンスタイル */
-    .btn {
-        display: inline-block;
-        background-color: #0066cc;
-        color: white;
-        padding: 10px 20px;
-        margin: 10px 0;
-        border-radius: 5px;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .btn:hover {
-        background-color: #004999;
-    }
-
-    /* コードハイライト簡易版 */
-    code {
-        background-color: #eee;
-        padding: 2px 4px;
-        border-radius: 3px;
-    }
-
+body {
+    background: white;
+    color: #111;
+    font-family: "Helvetica", "Arial", sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.7;
+}
+h1, h2, h3 {
+    color: #222;
+    margin-top: 30px;
+}
+p {
+    margin-bottom: 18px;
+}
+code {
+    background: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+pre {
+    background: #eee;
+    padding: 12px;
+    border-left: 5px solid #444;
+    overflow-x: auto;
+}
+.example {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
 </style>
 </head>
 <body>
 
-<section>
-    <h1>超濃密な解説ページ</h1>
-    <p>このページは、知識や解説をぎゅっと詰め込んだ超濃密版です。HTML・CSS・JavaScript・画像・コード例などを駆使して、読むだけでWeb制作の全体像が分かる構成になっています。</p>
+<h1>コダックの定理 — 超濃密解説</h1>
 
-    <h2>HTMLの基礎</h2>
-    <p>HTMLはWebページの骨格です。要素（タグ）を組み合わせて構造を作ります。</p>
-    <ul>
-        <li><code>&lt;header&gt;</code>：ページのヘッダー</li>
-        <li><code>&lt;main&gt;</code>：本文メイン部分</li>
-        <li><code>&lt;footer&gt;</code>：ページのフッター</li>
-        <li><code>&lt;section&gt;</code>：内容ごとの区切り</li>
-        <li><code>&lt;article&gt;</code>：記事単位</li>
-    </ul>
+<p>このページでは、  
+<strong>nビットで表現できる状態数が 2<sup>n</sup> 個であり、最大値が 2<sup>n</sup> − 1 になる理由と意味</strong> を、初学者にもわかりやすく、かつ深く理解できるよう解説します。</p>
 
-    <h2>CSSで見た目を制御</h2>
-    <p>CSSで色・余白・フォント・レイアウトを調整できます。例：</p>
-    <pre><code>body {
-    background-color: white;
-    color: #111;
-    font-family: Arial, sans-serif;
-}</code></pre>
-    <p>さらに、ボタンやコードブロックの装飾も自由自在です。</p>
+<hr>
 
-    <h2>JavaScriptで動きを追加</h2>
-    <p>ユーザー操作に応じてページを動的に変えることができます。例：</p>
-    <pre><code>document.querySelector('.btn').addEventListener('click', () =&gt; {
-    alert('濃密な情報！');
-});</code></pre>
-    <a class="btn">押してみて</a>
+<h2>1. コダックの定理（定式化）</h2>
+<p>任意の自然数 n について：</p>
 
-    <h2>画像で理解を深める</h2>
-    <p>視覚的な補助も大事です。GitHub Pages上の画像も自由に表示できます。</p>
-    <img src="https://mvjqkg7tpv-beep.github.io/my-website/sample-image.jpg" alt="サンプル画像">
+<ul>
+    <li><strong>nビットで表現できる状態数</strong> は <strong>2<sup>n</sup></strong></li>
+    <li><strong>その最大値</strong> は <strong>2<sup>n</sup> − 1</strong></li>
+</ul>
 
-    <h2>実践的な知識まとめ</h2>
-    <p>ここまでの内容を踏まえて、Web制作で意識すべきポイント：</p>
-    <ol>
-        <li>構造（HTML）と見た目（CSS）を分離する</li>
-        <li>読みやすいフォント・余白・色使いを意識する</li>
-        <li>動的要素（JavaScript）は必要な箇所だけに使う</li>
-        <li>画像・図表で理解を補助する</li>
-        <li>GitHub Pagesで公開すれば誰でもアクセス可能</li>
-    </ol>
+<p>これは、コンピュータの情報表現の「土台」です。  
+「ビット数＝情報量」の直感的な定量化でもあります。</p>
 
-    <h2>応用例：GitHub Pagesでの公開</h2>
-    <p>リポジトリにHTMLファイルを置き、<code>Settings &gt; Pages</code>で公開ブランチを指定するだけでOK。</p>
+<hr>
 
-    <h2>まとめ</h2>
-    <p>このページでは、Web制作の基本から応用まで、ぎゅっと情報を詰め込みました。読み進めることで、HTML・CSS・JavaScript・公開方法まで全体像がつかめます。</p>
+<h2>2. 状態数 2<sup>n</sup> の直感的証明</h2>
 
-    <p>さらに濃密にしたい場合は、各セクションに図解やコード例、具体的なプロジェクト例を追加すると完璧です。</p>
+<p>1ビットは 0 と 1 のどちらかの値を取れます。  
+つまり 2 通り。  
+2ビットでは次のように 4 通りになります：</p>
 
-</section>
+<pre><code>
+00
+01
+10
+11
+</code></pre>
+
+<p>これを一般化すると：</p>
+
+<ul>
+    <li>各ビットは 2 通り</li>
+    <li>n個のビットでは 2 × 2 × ... × 2 = 2<sup>n</sup></li>
+</ul>
+
+<p>数学的には、nビットの状態数は <strong>2 の n 乗</strong> です。  
+これは基本的な加法・乗法ルールと、二進法の定義から導かれます。 [oai_citation:0‡セプラス](https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/easy_calc/bit_pattern/?utm_source=chatgpt.com)</p>
+
+<hr>
+
+<h2>3. なぜ最大値が 2<sup>n</sup> − 1 なのか？</h2>
+
+<p>nビットの全てを「1」にしたパターン：</p>
+
+<pre><code>
+111...111 (n個)
+</code></pre>
+
+<p>このパターンを十進数に変換すると：</p>
+<pre><code>
+1×2ⁿ⁻¹ + 1×2ⁿ⁻² + ... + 1×2⁰ = 2ⁿ − 1
+</code></pre>
+
+<p>したがって、nビットで表せる最大の値は <strong>2<sup>n</sup> − 1</strong> です。  
+この解釈は、整数表現でも組み合わせとして数えるときでも同じです。 [oai_citation:1‡Stack Overflow](https://stackoverflow.com/questions/5771520/why-is-the-maximum-value-of-an-unsigned-n-bit-integer-2%E2%81%BF-1-and-not-2%E2%81%BF?utm_source=chatgpt.com)</p>
+
+<hr>
+
+<h2>4. 小さな例で深く理解する</h2>
+
+<div class="example">
+<h3>例：3ビットの場合</h3>
+<ul>
+<li>3ビットで表せる状態数：2<sup>3</sup> = 8</li>
+<li>0 から 7 までの 8 通りの値</li>
+<li>最大値は 7 = 2<sup>3</sup> − 1</li>
+</ul>
+<pre><code>
+000 = 0
+001 = 1
+010 = 2
+011 = 3
+100 = 4
+101 = 5
+110 = 6
+111 = 7
+</code></pre>
+</div>
+
+<p>この列を見ると、ビットパターンと整数が 1 対 1 で対応していることがわかります。  
+「nビットの状態数 = 2<sup>n</sup>」 の意味が直感的に理解できます。 [oai_citation:2‡Qiita](https://qiita.com/tk20211228/items/d25097d9a0ee4e1406cf?utm_source=chatgpt.com)</p>
+
+<hr>
+
+<h2>5. コダックの定理の意味・応用</h2>
+
+<h3>5-1. 情報理論としての意味</h3>
+<p>1ビットは 2 つの値しか取れない → 2 の n 乗が取りうる値の数 →  
+これは情報量の単位ビット（bit）の意味そのものです。  
+「n ビットの情報量」は 2<sup>n</sup> 通りの状態を区別できる能力を意味します。</p>
+
+<h3>5-2. コンピュータでの整数表現</h3>
+<p>コンピュータで整数を表すとき、nビットを使うと 0 ～ 2<sup>n</sup> − 1 の整数を格納できます。  
+これは整数型の範囲やオーバーフロー概念へつながります。 [oai_citation:3‡ウィキペディア](https://en.wikipedia.org/wiki/Integer_overflow?utm_source=chatgpt.com)</p>
+
+<h3>5-3. 組合せ論としての理解</h3>
+<p>nビットの各位置は状態 0/1 の 2 通りなので、  
+n 個の選択肢の組み合わせの数は 2<sup>n</sup> になる、  
+という組合せ論の基本にも一致します。</p>
+
+<hr>
+
+<h2>6. まとめ</h2>
+
+<ul>
+<li><strong>状態数 = 2<sup>n</sup></strong>：全てのビットパターンを数えると 2 の n 乗通りになる</li>
+<li><strong>最大値 = 2<sup>n</sup> − 1</strong>：最も値の大きいパターンは「全て1」のとき</li>
+<li>この理論はコンピュータやデータ表現の核心原理</li>
+</ul>
+
+<p>あなたの制作サイトにこのコードをそのまま置けば、  
+単なる定理紹介ページから **体系的で深い理解を促す濃密な学習ページ** に生まれ変わります。</p>
 
 </body>
 </html>
