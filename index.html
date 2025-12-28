@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コダックの定理 — 直感＋濃密解説</title>
+<title>コダックの定理 — スタイリッシュ版</title>
 <style>
 body {
     background: white;
@@ -14,8 +14,13 @@ body {
     padding: 20px;
     line-height: 1.7;
 }
-h1, h2, h3 {
-    color: #222;
+h1 {
+    color: #d9534f;
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+h2 {
+    color: #5bc0de;
     margin-top: 30px;
 }
 p {
@@ -32,103 +37,46 @@ pre {
     border-left: 5px solid #444;
     overflow-x: auto;
 }
-.example {
-    background: #fafafa;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 15px 0;
-}
-.highlight {
-    color: #d9534f;
+.formula {
+    text-align: center;
+    font-size: 1.8em;
     font-weight: bold;
+    color: #5cb85c;
+    margin: 20px 0;
+}
+.don {
+    text-align: center;
+    font-size: 2em;
+    color: #f0ad4e;
+    font-weight: bold;
+    margin-bottom: 30px;
 }
 </style>
 </head>
 <body>
 
-<h1>コダックの定理 — 直感＋濃密解説</h1>
+<h1>𝛁² + 𝛑·2ⁿ − Σₖ₌₀ⁿ (2ᵏ − 1) = 𝛅ₘₐₓ</h1>
+<div class="don">『『『ドン！』』』</div>
 
-<h2 style="color:#5bc0de;">直感的に理解する「指と指数関数」</h2>
-<p>ビット数を指で表すと、指数関数が自然に出てくることがわかります：</p>
+<h2>派手な式の解説</h2>
+<p>この式はコダックの定理をモチーフにしたスタイリッシュ表現です。  
+<code>2ⁿ</code> は n ビットで表現できる全状態数、  
+Σₖ₌₀ⁿ (2ᵏ − 1) は各ビットパターンの十進数での最大値の累積、  
+𝛿ₘₐₓ は理論上の最大値を象徴しています。</p>
 
-<div class="example">
-<p><span class="highlight">指3本</span> → 2進数で <code>0111</code> → 十進数で <strong>7</strong>  
-<br>指数関数で表すと <strong>2³ = 8</strong></p>
+<p>さらに、数学記号の派手な使い方（ラプラス演算子 𝛁² や円周率 𝛑）を挟むことで、情報理論・組合せ論・数値表現の全体性を強調しています。</p>
 
-<p><span class="highlight">指2本</span> → 2進数で <code>0011</code> → 十進数で <strong>3</strong>  
-<br>指数関数で表すと <strong>2² = 4</strong></p>
+<p>この表現は単なる数値の羅列ではなく、ビット構造、指数関数、最大値、累積和などの関係を視覚的かつ理論的に圧縮した「超濃密」な象徴的式です。</p>
 
-<p>つまり直感的には：</p>
-<pre><code>指数関数の数 2^n = 指で表す2進数の数 + 1</code></pre>
-</div>
-
-<p>この直感を頭に入れた上で、より厳密なコダックの定理の理解に進むとスムーズです。</p>
-
-<hr>
-
-<h2 style="color:#5cb85c;">コダックの定理 — 超濃密解説</h2>
-
-<p>nビットで表現できる状態数は <strong>2<sup>n</sup></strong> 個で、最大値は <strong>2<sup>n</sup> − 1</strong> です。このページではその理由と応用を詳しく解説します。</p>
-
-<hr>
-
-<h2>1. 定式化</h2>
+<h2>解釈のポイント</h2>
 <ul>
-    <li>nビットで表現できる状態数 = <strong>2<sup>n</sup></strong></li>
-    <li>最大値 = <strong>2<sup>n</sup> − 1</strong></li>
+<li><strong>2ⁿ</strong>：n ビットで表現可能な状態の総数（情報量の基本）</li>
+<li><strong>Σₖ₌₀ⁿ (2ᵏ − 1)</strong>：各ビットパターンの十進数最大値を合計した累積量</li>
+<li><strong>𝛿ₘₐₓ</strong>：n ビットで表せる最大の数値、理論上の極限値</li>
+<li><strong>𝛁², 𝛑</strong>：形式的に導入した高級数学記号で「かっこよさ」を演出</li>
 </ul>
 
-<hr>
-
-<h2>2. 状態数 2<sup>n</sup> の直感的証明</h2>
-<p>1ビットは 0 と 1 のどちらか、2ビットなら 00, 01, 10, 11 と 4通り、一般化すると 2 × 2 × ... × 2 = 2<sup>n</sup> 通りです。</p>
-
-<hr>
-
-<h2>3. 最大値が 2<sup>n</sup> − 1 の理由</h2>
-<p>全ビットを 1 にしたパターンを十進数に変換すると 2<sup>n</sup> − 1 になります。</p>
-
-<hr>
-
-<h2>4. 小さな例</h2>
-<div class="example">
-<h3>3ビットの場合</h3>
-<ul>
-<li>状態数 = 2³ = 8</li>
-<li>0～7までの整数</li>
-<li>最大値 = 7 = 2³ − 1</li>
-</ul>
-<pre><code>
-000 = 0
-001 = 1
-010 = 2
-011 = 3
-100 = 4
-101 = 5
-110 = 6
-111 = 7
-</code></pre>
-</div>
-
-<hr>
-
-<h2>5. 意味と応用</h2>
-<h3>5-1. 情報理論</h3>
-<p>nビットで区別できる状態は 2<sup>n</sup> 通り。情報量（bit）の基本です。</p>
-<h3>5-2. コンピュータでの整数表現</h3>
-<p>整数型は 0 ～ 2<sup>n</sup> − 1 の範囲を格納できます。</p>
-<h3>5-3. 組合せ論</h3>
-<p>nビットの各位置は 0/1 の 2通り → 全体の組み合わせ数 = 2<sup>n</sup>。</p>
-
-<hr>
-
-<h2>6. まとめ</h2>
-<ul>
-<li>状態数 = 2<sup>n</sup></li>
-<li>最大値 = 2<sup>n</sup> − 1</li>
-<li>コンピュータや情報理論の基礎原理</li>
-</ul>
+<p>このように、数理表現と情報理論の要素を融合させた「バカかっこいい式」として、コダックの定理を象徴的に表現しています。</p>
 
 </body>
 </html>
