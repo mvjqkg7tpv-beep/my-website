@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コダックの定理 — スタイリッシュ版</title>
+<title>コダックの定理 — 数式アニメ表示</title>
+
+<!-- MathJax 読み込み -->
+<script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 <style>
 body {
     background: white;
@@ -12,71 +18,63 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 20px;
-    line-height: 1.7;
 }
 h1 {
-    color: #d9534f;
-    font-size: 2em;
-    margin-bottom: 5px;
-}
-h2 {
-    color: #5bc0de;
-    margin-top: 30px;
-}
-p {
-    margin-bottom: 18px;
-}
-code {
-    background: #f5f5f5;
-    padding: 2px 4px;
-    border-radius: 4px;
-}
-pre {
-    background: #eee;
-    padding: 12px;
-    border-left: 5px solid #444;
-    overflow-x: auto;
-}
-.formula {
+    color: #222;
     text-align: center;
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #5cb85c;
-    margin: 20px 0;
+    font-size: 2.2em;
+    margin-top: 40px;
 }
 .don {
     text-align: center;
-    font-size: 2em;
+    font-size: 2.4em;
     color: #f0ad4e;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin: 20px 0;
+}
+.mathblock {
+    font-size: 1.8em;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 </style>
 </head>
 <body>
 
-<h1>𝛁² + 𝛑·2ⁿ − Σₖ₌₀ⁿ (2ᵏ − 1) = 𝛅ₘₐₓ</h1>
+<h1>
+  <span class="mathblock">
+    \[
+      \Delta \bigl(2^n - 1\bigr) \;=\; \sum_{k=0}^{n} 2^k - 1
+    \]
+  </span>
+</h1>
+
 <div class="don">『『『ドン！』』』</div>
 
-<h2>派手な式の解説</h2>
-<p>この式はコダックの定理をモチーフにしたスタイリッシュ表現です。  
-<code>2ⁿ</code> は n ビットで表現できる全状態数、  
-Σₖ₌₀ⁿ (2ᵏ − 1) は各ビットパターンの十進数での最大値の累積、  
-𝛿ₘₐₓ は理論上の最大値を象徴しています。</p>
+<h2>直感的な意味</h2>
+<p>
+  この数式は「nビットで表現できる総状態数」と「最大値の構造」を  
+  組合せ論・指数関数として凝縮したものです。MathJax を用いることで  
+  LaTeX 形式の数式をウェブブラウザ上に美しくレンダリングしています。 [oai_citation:2‡Qiita](https://qiita.com/ken1math/items/ad70949ad42e905ad1a8?utm_source=chatgpt.com)
+</p>
 
-<p>さらに、数学記号の派手な使い方（ラプラス演算子 𝛁² や円周率 𝛑）を挟むことで、情報理論・組合せ論・数値表現の全体性を強調しています。</p>
+<h2>公式の背景</h2>
+<p>
+  右辺の \(\sum_{k=0}^{n} 2^k - 1\) は各ビットの最大値を累積した和であり、  
+  左辺の \(\Delta (2^n - 1)\) は「状態数 2^n − 1 の差分量」を象徴的に示しています。  
+</p>
 
-<p>この表現は単なる数値の羅列ではなく、ビット構造、指数関数、最大値、累積和などの関係を視覚的かつ理論的に圧縮した「超濃密」な象徴的式です。</p>
-
-<h2>解釈のポイント</h2>
-<ul>
-<li><strong>2ⁿ</strong>：n ビットで表現可能な状態の総数（情報量の基本）</li>
-<li><strong>Σₖ₌₀ⁿ (2ᵏ − 1)</strong>：各ビットパターンの十進数最大値を合計した累積量</li>
-<li><strong>𝛿ₘₐₓ</strong>：n ビットで表せる最大の数値、理論上の極限値</li>
-<li><strong>𝛁², 𝛑</strong>：形式的に導入した高級数学記号で「かっこよさ」を演出</li>
-</ul>
-
-<p>このように、数理表現と情報理論の要素を融合させた「バカかっこいい式」として、コダックの定理を象徴的に表現しています。</p>
+<h2>アニメーション効果について</h2>
+<p>
+  数式部分には CSS のアニメーションを適用してフェードインさせています。  
+  MathJax による数式レンダリング自体は JavaScript で動的に行われ、  
+  LaTeX 記法をそのまま埋め込むだけで美しく表示されます。 [oai_citation:3‡tohoho-web.com](https://www.tohoho-web.com/ex/mathjax.html?utm_source=chatgpt.com)
+</p>
 
 </body>
 </html>
