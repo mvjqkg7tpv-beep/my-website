@@ -2,43 +2,137 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>コダックの定理 解説</title>
-<meta name="google-site-verification" content="googlee243c150bd36650d.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超濃密解説ページ</title>
 <style>
-body { background:#02030a; color:#e8e8ff; font-family:sans-serif; padding:40px; }
-h1,h2 { color:#8ab4ff; }
-.box { background:#0b1020; padding:20px; border-radius:10px; margin:20px 0; }
+    /* 基本レイアウト */
+    body {
+        background-color: white;
+        color: #111;
+        font-family: 'Helvetica', 'Arial', sans-serif;
+        line-height: 1.7;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1, h2, h3 {
+        color: #222;
+        margin-top: 40px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    pre {
+        background-color: #f5f5f5;
+        padding: 15px;
+        border-left: 5px solid #555;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    section {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+        margin: 20px 0;
+    }
+
+    /* ボタンスタイル */
+    .btn {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #004999;
+    }
+
+    /* コードハイライト簡易版 */
+    code {
+        background-color: #eee;
+        padding: 2px 4px;
+        border-radius: 3px;
+    }
+
 </style>
 </head>
 <body>
 
-<h1>コダックの定理 — 解説</h1>
+<section>
+    <h1>超濃密な解説ページ</h1>
+    <p>このページは、知識や解説をぎゅっと詰め込んだ超濃密版です。HTML・CSS・JavaScript・画像・コード例などを駆使して、読むだけでWeb制作の全体像が分かる構成になっています。</p>
 
-<div class="box">
-<h2>定理</h2>
-<p>
-nビットで表現できる状態数は 2<sup>n</sup> 個であり、  
-最大値は 2<sup>n</sup> − 1 である。
-</p>
-</div>
+    <h2>HTMLの基礎</h2>
+    <p>HTMLはWebページの骨格です。要素（タグ）を組み合わせて構造を作ります。</p>
+    <ul>
+        <li><code>&lt;header&gt;</code>：ページのヘッダー</li>
+        <li><code>&lt;main&gt;</code>：本文メイン部分</li>
+        <li><code>&lt;footer&gt;</code>：ページのフッター</li>
+        <li><code>&lt;section&gt;</code>：内容ごとの区切り</li>
+        <li><code>&lt;article&gt;</code>：記事単位</li>
+    </ul>
 
-<div class="box">
-<h2>なぜ成り立つか</h2>
-<p>
-1ビットは 0 / 1 の2通り。  
-よって nビットでは 2 × 2 × … × 2 = 2<sup>n</sup> 通りとなる。
-</p>
-</div>
+    <h2>CSSで見た目を制御</h2>
+    <p>CSSで色・余白・フォント・レイアウトを調整できます。例：</p>
+    <pre><code>body {
+    background-color: white;
+    color: #111;
+    font-family: Arial, sans-serif;
+}</code></pre>
+    <p>さらに、ボタンやコードブロックの装飾も自由自在です。</p>
 
-<div class="box">
-<h2>意味</h2>
-<p>
-これはコンピュータ、情報理論、暗号、物理学の基礎原理であり、  
-「情報量の限界」を示す最重要法則である。
-</p>
-</div>
+    <h2>JavaScriptで動きを追加</h2>
+    <p>ユーザー操作に応じてページを動的に変えることができます。例：</p>
+    <pre><code>document.querySelector('.btn').addEventListener('click', () =&gt; {
+    alert('濃密な情報！');
+});</code></pre>
+    <a class="btn">押してみて</a>
 
-<p><a href="index.html">← トップに戻る</a></p>
+    <h2>画像で理解を深める</h2>
+    <p>視覚的な補助も大事です。GitHub Pages上の画像も自由に表示できます。</p>
+    <img src="https://mvjqkg7tpv-beep.github.io/my-website/sample-image.jpg" alt="サンプル画像">
+
+    <h2>実践的な知識まとめ</h2>
+    <p>ここまでの内容を踏まえて、Web制作で意識すべきポイント：</p>
+    <ol>
+        <li>構造（HTML）と見た目（CSS）を分離する</li>
+        <li>読みやすいフォント・余白・色使いを意識する</li>
+        <li>動的要素（JavaScript）は必要な箇所だけに使う</li>
+        <li>画像・図表で理解を補助する</li>
+        <li>GitHub Pagesで公開すれば誰でもアクセス可能</li>
+    </ol>
+
+    <h2>応用例：GitHub Pagesでの公開</h2>
+    <p>リポジトリにHTMLファイルを置き、<code>Settings &gt; Pages</code>で公開ブランチを指定するだけでOK。</p>
+
+    <h2>まとめ</h2>
+    <p>このページでは、Web制作の基本から応用まで、ぎゅっと情報を詰め込みました。読み進めることで、HTML・CSS・JavaScript・公開方法まで全体像がつかめます。</p>
+
+    <p>さらに濃密にしたい場合は、各セクションに図解やコード例、具体的なプロジェクト例を追加すると完璧です。</p>
+
+</section>
 
 </body>
 </html>
