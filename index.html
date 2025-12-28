@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コダックの定理 — 数式アニメ表示</title>
-
-<!-- MathJax 読み込み -->
+<title>コダックの定理 — 数式表示版</title>
 <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
-
 <style>
 body {
     background: white;
@@ -18,62 +15,84 @@ body {
     max-width: 900px;
     margin: auto;
     padding: 20px;
+    line-height: 1.7;
 }
-h1 {
+h1, h2 {
     color: #222;
-    text-align: center;
-    font-size: 2.2em;
-    margin-top: 40px;
+    margin-top: 30px;
 }
-.don {
+p {
+    margin-bottom: 18px;
+}
+code {
+    background: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+pre {
+    background: #eee;
+    padding: 12px;
+    border-left: 5px solid #444;
+    overflow-x: auto;
+}
+.mathblock {
     text-align: center;
-    font-size: 2.4em;
-    color: #f0ad4e;
+    font-size: 1.8em;
     font-weight: bold;
     margin: 20px 0;
 }
-.mathblock {
-    font-size: 1.8em;
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 2s ease-in forwards;
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+.example {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
 }
 </style>
 </head>
 <body>
 
-<h1>
-  <span class="mathblock">
-    \[
-      \Delta \bigl(2^n - 1\bigr) \;=\; \sum_{k=0}^{n} 2^k - 1
-    \]
-  </span>
+<h1 class="mathblock">
+  \[
+    \Delta \bigl(2^n - 1\bigr) = \sum_{k=0}^{n} 2^k - 1
+  \]
 </h1>
-
-<div class="don">『『『ドン！』』』</div>
 
 <h2>直感的な意味</h2>
 <p>
-  この数式は「nビットで表現できる総状態数」と「最大値の構造」を  
-  組合せ論・指数関数として凝縮したものです。MathJax を用いることで  
-  LaTeX 形式の数式をウェブブラウザ上に美しくレンダリングしています。 [oai_citation:2‡Qiita](https://qiita.com/ken1math/items/ad70949ad42e905ad1a8?utm_source=chatgpt.com)
+  この式は「nビットで表現できる総状態数」と「最大値の構造」を表しています。  
+  MathJax によって LaTeX 形式の数式をブラウザ上で美しくレンダリングできます。
 </p>
 
-<h2>公式の背景</h2>
+<h2>式の構造</h2>
 <p>
-  右辺の \(\sum_{k=0}^{n} 2^k - 1\) は各ビットの最大値を累積した和であり、  
-  左辺の \(\Delta (2^n - 1)\) は「状態数 2^n − 1 の差分量」を象徴的に示しています。  
+  右辺の \(\sum_{k=0}^{n} 2^k - 1\) は各ビットパターンの十進数での最大値を累積したものです。  
+  左辺の \(\Delta (2^n - 1)\) は状態数の差分量を象徴的に示しています。
 </p>
 
-<h2>アニメーション効果について</h2>
+<h2>例</h2>
+<div class="example">
+<h3>3ビットの場合</h3>
+<ul>
+<li>状態数 = 2³ = 8</li>
+<li>0〜7までの整数</li>
+<li>最大値 = 7 = 2³ − 1</li>
+</ul>
+<pre><code>
+000 = 0
+001 = 1
+010 = 2
+011 = 3
+100 = 4
+101 = 5
+110 = 6
+111 = 7
+</code></pre>
+</div>
+
+<h2>背景・応用</h2>
 <p>
-  数式部分には CSS のアニメーションを適用してフェードインさせています。  
-  MathJax による数式レンダリング自体は JavaScript で動的に行われ、  
-  LaTeX 記法をそのまま埋め込むだけで美しく表示されます。 [oai_citation:3‡tohoho-web.com](https://www.tohoho-web.com/ex/mathjax.html?utm_source=chatgpt.com)
+  この式は、情報理論やコンピュータでの整数表現、組合せ論などの関係性を簡潔にまとめています。
 </p>
 
 </body>
