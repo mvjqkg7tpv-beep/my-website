@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>コダックの定理 — 超濃密解説</title>
+<title>コダックの定理 — 直感＋濃密解説</title>
 <style>
 body {
     background: white;
@@ -39,81 +39,65 @@ pre {
     border-radius: 8px;
     margin: 15px 0;
 }
+.highlight {
+    color: #d9534f;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
 
-<h1>コダックの定理 — 超濃密解説</h1>
+<h1>コダックの定理 — 直感＋濃密解説</h1>
 
-<p>このページでは、  
-<strong>nビットで表現できる状態数が 2<sup>n</sup> 個であり、最大値が 2<sup>n</sup> − 1 になる理由と意味</strong> を、初学者にもわかりやすく、かつ深く理解できるよう解説します。</p>
+<h2 style="color:#5bc0de;">直感的に理解する「指と指数関数」</h2>
+<p>ビット数を指で表すと、指数関数が自然に出てくることがわかります：</p>
+
+<div class="example">
+<p><span class="highlight">指3本</span> → 2進数で <code>0111</code> → 十進数で <strong>7</strong>  
+<br>指数関数で表すと <strong>2³ = 8</strong></p>
+
+<p><span class="highlight">指2本</span> → 2進数で <code>0011</code> → 十進数で <strong>3</strong>  
+<br>指数関数で表すと <strong>2² = 4</strong></p>
+
+<p>つまり直感的には：</p>
+<pre><code>指数関数の数 2^n = 指で表す2進数の数 + 1</code></pre>
+</div>
+
+<p>この直感を頭に入れた上で、より厳密なコダックの定理の理解に進むとスムーズです。</p>
 
 <hr>
 
-<h2>1. コダックの定理（定式化）</h2>
-<p>任意の自然数 n について：</p>
+<h2 style="color:#5cb85c;">コダックの定理 — 超濃密解説</h2>
 
+<p>nビットで表現できる状態数は <strong>2<sup>n</sup></strong> 個で、最大値は <strong>2<sup>n</sup> − 1</strong> です。このページではその理由と応用を詳しく解説します。</p>
+
+<hr>
+
+<h2>1. 定式化</h2>
 <ul>
-    <li><strong>nビットで表現できる状態数</strong> は <strong>2<sup>n</sup></strong></li>
-    <li><strong>その最大値</strong> は <strong>2<sup>n</sup> − 1</strong></li>
+    <li>nビットで表現できる状態数 = <strong>2<sup>n</sup></strong></li>
+    <li>最大値 = <strong>2<sup>n</sup> − 1</strong></li>
 </ul>
-
-<p>これは、コンピュータの情報表現の「土台」です。  
-「ビット数＝情報量」の直感的な定量化でもあります。</p>
 
 <hr>
 
 <h2>2. 状態数 2<sup>n</sup> の直感的証明</h2>
-
-<p>1ビットは 0 と 1 のどちらかの値を取れます。  
-つまり 2 通り。  
-2ビットでは次のように 4 通りになります：</p>
-
-<pre><code>
-00
-01
-10
-11
-</code></pre>
-
-<p>これを一般化すると：</p>
-
-<ul>
-    <li>各ビットは 2 通り</li>
-    <li>n個のビットでは 2 × 2 × ... × 2 = 2<sup>n</sup></li>
-</ul>
-
-<p>数学的には、nビットの状態数は <strong>2 の n 乗</strong> です。  
-これは基本的な加法・乗法ルールと、二進法の定義から導かれます。 [oai_citation:0‡セプラス](https://www.seplus.jp/dokushuzemi/ec/fe/fenavi/easy_calc/bit_pattern/?utm_source=chatgpt.com)</p>
+<p>1ビットは 0 と 1 のどちらか、2ビットなら 00, 01, 10, 11 と 4通り、一般化すると 2 × 2 × ... × 2 = 2<sup>n</sup> 通りです。</p>
 
 <hr>
 
-<h2>3. なぜ最大値が 2<sup>n</sup> − 1 なのか？</h2>
-
-<p>nビットの全てを「1」にしたパターン：</p>
-
-<pre><code>
-111...111 (n個)
-</code></pre>
-
-<p>このパターンを十進数に変換すると：</p>
-<pre><code>
-1×2ⁿ⁻¹ + 1×2ⁿ⁻² + ... + 1×2⁰ = 2ⁿ − 1
-</code></pre>
-
-<p>したがって、nビットで表せる最大の値は <strong>2<sup>n</sup> − 1</strong> です。  
-この解釈は、整数表現でも組み合わせとして数えるときでも同じです。 [oai_citation:1‡Stack Overflow](https://stackoverflow.com/questions/5771520/why-is-the-maximum-value-of-an-unsigned-n-bit-integer-2%E2%81%BF-1-and-not-2%E2%81%BF?utm_source=chatgpt.com)</p>
+<h2>3. 最大値が 2<sup>n</sup> − 1 の理由</h2>
+<p>全ビットを 1 にしたパターンを十進数に変換すると 2<sup>n</sup> − 1 になります。</p>
 
 <hr>
 
-<h2>4. 小さな例で深く理解する</h2>
-
+<h2>4. 小さな例</h2>
 <div class="example">
-<h3>例：3ビットの場合</h3>
+<h3>3ビットの場合</h3>
 <ul>
-<li>3ビットで表せる状態数：2<sup>3</sup> = 8</li>
-<li>0 から 7 までの 8 通りの値</li>
-<li>最大値は 7 = 2<sup>3</sup> − 1</li>
+<li>状態数 = 2³ = 8</li>
+<li>0～7までの整数</li>
+<li>最大値 = 7 = 2³ − 1</li>
 </ul>
 <pre><code>
 000 = 0
@@ -127,39 +111,24 @@ pre {
 </code></pre>
 </div>
 
-<p>この列を見ると、ビットパターンと整数が 1 対 1 で対応していることがわかります。  
-「nビットの状態数 = 2<sup>n</sup>」 の意味が直感的に理解できます。 [oai_citation:2‡Qiita](https://qiita.com/tk20211228/items/d25097d9a0ee4e1406cf?utm_source=chatgpt.com)</p>
-
 <hr>
 
-<h2>5. コダックの定理の意味・応用</h2>
-
-<h3>5-1. 情報理論としての意味</h3>
-<p>1ビットは 2 つの値しか取れない → 2 の n 乗が取りうる値の数 →  
-これは情報量の単位ビット（bit）の意味そのものです。  
-「n ビットの情報量」は 2<sup>n</sup> 通りの状態を区別できる能力を意味します。</p>
-
+<h2>5. 意味と応用</h2>
+<h3>5-1. 情報理論</h3>
+<p>nビットで区別できる状態は 2<sup>n</sup> 通り。情報量（bit）の基本です。</p>
 <h3>5-2. コンピュータでの整数表現</h3>
-<p>コンピュータで整数を表すとき、nビットを使うと 0 ～ 2<sup>n</sup> − 1 の整数を格納できます。  
-これは整数型の範囲やオーバーフロー概念へつながります。 [oai_citation:3‡ウィキペディア](https://en.wikipedia.org/wiki/Integer_overflow?utm_source=chatgpt.com)</p>
-
-<h3>5-3. 組合せ論としての理解</h3>
-<p>nビットの各位置は状態 0/1 の 2 通りなので、  
-n 個の選択肢の組み合わせの数は 2<sup>n</sup> になる、  
-という組合せ論の基本にも一致します。</p>
+<p>整数型は 0 ～ 2<sup>n</sup> − 1 の範囲を格納できます。</p>
+<h3>5-3. 組合せ論</h3>
+<p>nビットの各位置は 0/1 の 2通り → 全体の組み合わせ数 = 2<sup>n</sup>。</p>
 
 <hr>
 
 <h2>6. まとめ</h2>
-
 <ul>
-<li><strong>状態数 = 2<sup>n</sup></strong>：全てのビットパターンを数えると 2 の n 乗通りになる</li>
-<li><strong>最大値 = 2<sup>n</sup> − 1</strong>：最も値の大きいパターンは「全て1」のとき</li>
-<li>この理論はコンピュータやデータ表現の核心原理</li>
+<li>状態数 = 2<sup>n</sup></li>
+<li>最大値 = 2<sup>n</sup> − 1</li>
+<li>コンピュータや情報理論の基礎原理</li>
 </ul>
-
-<p>あなたの制作サイトにこのコードをそのまま置けば、  
-単なる定理紹介ページから **体系的で深い理解を促す濃密な学習ページ** に生まれ変わります。</p>
 
 </body>
 </html>
