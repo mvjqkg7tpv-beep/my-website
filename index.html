@@ -1,59 +1,92 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>コダックの定理とは？ nビットで表現できる数と最大値(2^n−1)</title>
+<title>コダックの定理 - nビットで表せる最大値は 2^n − 1</title>
 
-<meta name="description" content="コダックの定理をわかりやすく解説。nビットで表現できる数は2^n個、最大値は2^n−1になる原理と具体例を説明します。">
+<meta name="description" content="コダックの定理とは、nビットで表せる最大値が 2^n − 1 になるという法則である。2進数、情報理論、コンピュータ科学との関係を解説。">
 
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mvjqkg7tpv-beep.github.io/my-website/">
-<meta name="google-site-verification" content="googlee243c150bd36650d.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="google-site-verification" content="googlee243c150bd36650d">
+
+<!-- MathJax 数式 -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- 構造化データ -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "コダックの定理",
+ "description": "nビットで表せる最大値は 2^n − 1 になるという法則。",
+ "author": {
+   "@type": "Person",
+   "name": "山口"
+ },
+ "about": "コンピュータ科学"
+}
+</script>
 
 <style>
 
 body{
-font-family: system-ui, sans-serif;
-max-width: 900px;
+font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;
+background:#f8f9fa;
+margin:0;
+padding:0;
+}
+
+#container{
+max-width:900px;
 margin:auto;
-padding:30px;
-line-height:1.9;
+background:white;
+padding:40px;
 }
 
 h1{
-border-bottom:3px solid #333;
+font-size:32px;
+border-bottom:2px solid #aaa;
 padding-bottom:10px;
 }
 
 h2{
-margin-top:45px;
+border-bottom:1px solid #ccc;
+padding-bottom:5px;
+margin-top:40px;
 }
 
-.box{
-background:#f4f4f4;
-padding:15px;
-border-radius:10px;
-margin:20px 0;
+h3{
+margin-top:25px;
+}
+
+p{
+line-height:1.7;
 }
 
 table{
 border-collapse:collapse;
-margin:20px 0;
+margin-top:10px;
 }
 
-th,td{
+table th,table td{
+border:1px solid #aaa;
+padding:8px;
+}
+
+#toc{
+background:#f1f1f1;
+padding:20px;
 border:1px solid #ccc;
-padding:10px;
-text-align:center;
 }
 
-code{
-background:#eee;
-padding:4px 6px;
-border-radius:5px;
+#formula{
+font-size:30px;
+text-align:center;
+margin:30px;
 }
 
 </style>
@@ -62,282 +95,302 @@ border-radius:5px;
 
 <body>
 
+<div id="container">
+
 <h1>コダックの定理</h1>
 
-<p>
-<strong>コダックの定理</strong>とは、
-<b>nビットで表現できる値の数は 2^n 個であり、
-最大値は 2^n − 1 になる</b>という原理です。
-</p>
+<div id="formula">
+
+\\[
+最大値 = 2^n - 1
+\\]
+
+</div>
 
 <p>
-これはコンピュータのデータ表現を理解するうえで
-非常に基本となる考え方です。
+コダックの定理とは、ビット数と表現できる整数の最大値の関係を表す法則である。
 </p>
 
-<div class="box">
+<div id="toc">
 
-<b>結論</b>
+<h2>目次</h2>
 
 <ul>
-<li>nビットの状態数 → <strong>2^n</strong></li>
-<li>最大値 → <strong>2^n − 1</strong></li>
+<li>概要</li>
+<li>数学的説明</li>
+<li>組み合わせ論</li>
+<li>2進数との関係</li>
+<li>具体例</li>
+<li>ビット数と最大値</li>
+<li>符号付き整数</li>
+<li>2の補数</li>
+<li>浮動小数点</li>
+<li>bit mask</li>
+<li>情報理論</li>
+<li>CPU</li>
+<li>メモリ</li>
+<li>ネットワーク</li>
+<li>カラー表現</li>
+<li>歴史</li>
+
 </ul>
 
 </div>
 
-<h2>ビットとは何か</h2>
+<h2>概要</h2>
 
 <p>
-ビット（bit）とは、コンピュータが情報を表現する最小単位です。
+コンピュータは情報をビット列で扱う。
+ビットとは0または1の状態を持つ情報単位である。
 </p>
 
 <p>
-1ビットは次の2つの状態を持ちます。
+n個のビットが存在するとき、取り得る状態数は
 </p>
+
+<p>
+
+\\[
+2^n
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<p>
+整数は0から始まるため最大値は
+</p>
+
+<p>
+
+\\[
+2^n - 1
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<h2>数学的説明</h2>
+
+<p>
+n個のビットがあるとき、それぞれのビットは2通りの状態を持つ。
+</p>
+
+<p>
+
+\\[
+2 × 2 × 2 × ... × 2 = 2^n
+\\]
+
+</p>
+
+<p>
+この組み合わせ数が表現可能な状態数になる。
+</p>
+
+<h2>組み合わせ論</h2>
+
+<p>
+各ビットは独立した二値変数である。
+</p>
+
+<p>
+したがって状態数は指数関数的に増加する。
+</p>
+
+<h2>2進数との関係</h2>
+
+<p>
+2進数では各桁の重みは
+</p>
+
+<p>
+
+\\[
+2^0 , 2^1 , 2^2 , 2^3 ...
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<h2>具体例</h2>
+
+<h3>4ビット</h3>
 
 <ul>
-<li>0</li>
-<li>1</li>
+
+<li>0000 = 0</li>
+<li>0001 = 1</li>
+<li>0010 = 2</li>
+<li>0011 = 3</li>
+<li>0100 = 4</li>
+<li>0101 = 5</li>
+<li>0110 = 6</li>
+<li>0111 = 7</li>
+<li>1000 = 8</li>
+<li>1001 = 9</li>
+<li>1010 = 10</li>
+<li>1011 = 11</li>
+<li>1100 = 12</li>
+<li>1101 = 13</li>
+<li>1110 = 14</li>
+<li>1111 = 15</li>
+
 </ul>
 
 <p>
-これはスイッチの
+
+\\[
+最大値 = 2^4 - 1 = 15
+\\]
+
 </p>
 
-<ul>
-<li>ON</li>
-<li>OFF</li>
-</ul>
-
-<p>
-のようなものです。
-</p>
-
-<h2>ビットが増えるとどうなるか</h2>
-
-<p>
-ビットが増えると、組み合わせの数が増えていきます。
-</p>
+<h2>ビット数と最大値</h2>
 
 <table>
 
 <tr>
+
 <th>ビット数</th>
-<th>状態数</th>
 <th>最大値</th>
+
 </tr>
 
-<tr>
-<td>1</td>
-<td>2</td>
-<td>1</td>
-</tr>
+<tr><td>8</td><td>255</td></tr>
 
-<tr>
-<td>2</td>
-<td>4</td>
-<td>3</td>
-</tr>
+<tr><td>16</td><td>65535</td></tr>
 
-<tr>
-<td>3</td>
-<td>8</td>
-<td>7</td>
-</tr>
+<tr><td>32</td><td>4294967295</td></tr>
 
-<tr>
-<td>4</td>
-<td>16</td>
-<td>15</td>
-</tr>
-
-<tr>
-<td>8</td>
-<td>256</td>
-<td>255</td>
-</tr>
-
-<tr>
-<td>16</td>
-<td>65536</td>
-<td>65535</td>
-</tr>
+<tr><td>64</td><td>18446744073709551615</td></tr>
 
 </table>
 
-<p>
-このように、ビット数が増えると状態数は
-<strong>指数関数的に増えます。</strong>
-</p>
-
-<h2>なぜ2^nになるのか</h2>
+<h2>符号付き整数</h2>
 
 <p>
-各ビットは
-</p>
 
-<ul>
-<li>0</li>
-<li>1</li>
-</ul>
+\\[
+-2^{n-1} 〜 2^{n-1}-1
+\\]
 
-<p>
-の2通りを持ちます。
 </p>
 
 <p>
-例えば2ビットの場合
+符号付き整数では最上位ビットが符号になる。
 </p>
 
-<ul>
-<li>00</li>
-<li>01</li>
-<li>10</li>
-<li>11</li>
-</ul>
+<h2>2の補数</h2>
 
 <p>
-の4通りです。
+負数の表現には2の補数が使われる。
 </p>
 
-<p>
-つまり
-</p>
+<h2>浮動小数点</h2>
 
 <p>
-<code>2 × 2 = 4</code>
-</p>
-
-<p>
-になります。
-</p>
-
-<p>
-3ビットなら
-</p>
-
-<p>
-<code>2 × 2 × 2 = 8</code>
-</p>
-
-<p>
-となります。
-</p>
-
-<p>
-一般化すると
-</p>
-
-<p>
-<code>2^n</code>
-</p>
-
-<p>
-になります。
-</p>
-
-<h2>最大値が2^n−1になる理由</h2>
-
-<p>
-最大値は、すべてのビットが1のときです。
-</p>
-
-<p>
-例：8ビット
-</p>
-
-<p>
-<code>11111111</code>
-</p>
-
-<p>
-これは10進数で
-</p>
-
-<p>
-<code>255</code>
-</p>
-
-<p>
-になります。
-</p>
-
-<p>
-つまり
-</p>
-
-<p>
-<code>2^8 − 1 = 255</code>
-</p>
-
-<p>
-です。
-</p>
-
-<h2>コンピュータでの具体例</h2>
-
-<p>
-コンピュータでは次のようなビット数がよく使われます。
+浮動小数点数は
 </p>
 
 <ul>
 
-<li>8ビット（1バイト）</li>
-<li>16ビット</li>
-<li>32ビット</li>
-<li>64ビット</li>
+<li>符号</li>
+<li>指数</li>
+<li>仮数</li>
 
 </ul>
 
 <p>
-例えば
+に分かれる。
 </p>
+
+<h2>bit mask</h2>
+
+<p>
+特定のビットを操作するためのビット列である。
+</p>
+
+<h2>情報理論</h2>
+
+<p>
+
+\\[
+情報量 = log_2(N)
+\\]
+
+</p>
+
+<p>
+Nは状態数である。
+</p>
+
+<h2>CPU</h2>
 
 <ul>
 
-<li>8ビット → 0〜255</li>
-<li>16ビット → 0〜65535</li>
+<li>8bit</li>
+<li>16bit</li>
+<li>32bit</li>
+<li>64bit</li>
 
 </ul>
 
-<p>
-という範囲の整数を表現できます。
-</p>
-
-<h2>なぜこの定理が重要なのか</h2>
+<h2>メモリ</h2>
 
 <p>
-この原理は多くの分野で使われています。
+メモリアドレスはビット列で管理される。
 </p>
 
-<ul>
-
-<li>コンピュータのメモリ</li>
-<li>整数型の最大値</li>
-<li>データ圧縮</li>
-<li>暗号</li>
-<li>プログラミング</li>
-
-</ul>
+<h2>ネットワーク</h2>
 
 <p>
-つまり、コンピュータの世界では
-<strong>ほぼすべてのデータ表現がこの考え方に基づいています。</strong>
+
+\\[
+IPv4 = 2^{32}
+\\]
+
 </p>
-
-<h2>まとめ</h2>
-
-<ul>
-
-<li>nビットの状態数 → <strong>2^n</strong></li>
-<li>最大値 → <strong>2^n − 1</strong></li>
-
-</ul>
 
 <p>
-これが<strong>コダックの定理</strong>です。
+約43億のアドレスを持つ。
 </p>
+
+<h2>カラー表現</h2>
+
+<p>
+RGBカラーでは各色が8ビットで表現される。
+</p>
+
+<p>
+そのため値は0〜255になる。
+</p>
+
+<h2>歴史</h2>
+
+<p>
+2進数は17世紀に数学者
+</p>
+
+<p>
+ゴットフリート・ライプニッツ
+</p>
+
+<p>
+によって研究された。
+</p>
+
+</div>
 
 </body>
+
 </html>
