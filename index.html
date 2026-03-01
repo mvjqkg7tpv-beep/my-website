@@ -5,29 +5,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>コダックの定理とは？ nビットで表現できる数と最大値(2^n − 1)</title>
+<title>コダックの定理とは？ nビットで表現できる数と最大値(2^n−1)</title>
 
-<meta name="description" content="コダックの定理をわかりやすく解説。nビットで表現できる値の数は2^n個で最大値は2^n−1になります。コンピュータの基本原理です。">
+<meta name="description" content="コダックの定理をわかりやすく解説。nビットで表現できる数は2^n個、最大値は2^n−1になる原理と具体例を説明します。">
 
 <meta name="robots" content="index, follow">
-
 <link rel="canonical" href="https://mvjqkg7tpv-beep.github.io/my-website/">
-
 <meta name="google-site-verification" content="googlee243c150bd36650d.html">
 
 <style>
 
 body{
 font-family: system-ui, sans-serif;
-max-width: 850px;
+max-width: 900px;
 margin:auto;
-padding:25px;
-line-height:1.8;
+padding:30px;
+line-height:1.9;
 }
 
 h1{
 border-bottom:3px solid #333;
-padding-bottom:8px;
+padding-bottom:10px;
 }
 
 h2{
@@ -41,70 +39,24 @@ border-radius:10px;
 margin:20px 0;
 }
 
+table{
+border-collapse:collapse;
+margin:20px 0;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:10px;
+text-align:center;
+}
+
 code{
 background:#eee;
 padding:4px 6px;
 border-radius:5px;
 }
 
-table{
-border-collapse:collapse;
-margin:20px 0;
-}
-
-td,th{
-border:1px solid #ccc;
-padding:8px;
-}
-
-footer{
-margin-top:60px;
-font-size:14px;
-color:#666;
-}
-
 </style>
-
-<!-- Google構造化データ -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "Article",
- "headline": "コダックの定理",
- "description": "nビットで表現できる値の数は2^n個で最大値は2^n−1になる。",
- "author": {
-   "@type": "Person",
-   "name": "あんきん"
- },
- "mainEntityOfPage": "https://mvjqkg7tpv-beep.github.io/my-website/"
-}
-</script>
-
-<!-- FAQ構造化データ -->
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"FAQPage",
-"mainEntity":[
-{
-"@type":"Question",
-"name":"コダックの定理とは？",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"nビットで表現できる値の数は2^n個で最大値は2^n−1になるという原理です。"
-}
-},
-{
-"@type":"Question",
-"name":"なぜ2^nになるの？",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"各ビットが0か1の2通りを持つため、ビットが増えるごとに組み合わせが2倍になるからです。"
-}
-}
-]
-}
-</script>
 
 </head>
 
@@ -118,19 +70,58 @@ color:#666;
 最大値は 2^n − 1 になる</b>という原理です。
 </p>
 
+<p>
+これはコンピュータのデータ表現を理解するうえで
+非常に基本となる考え方です。
+</p>
+
 <div class="box">
-例
+
+<b>結論</b>
+
 <ul>
-<li>1ビット → 2通り</li>
-<li>2ビット → 4通り</li>
-<li>4ビット → 16通り</li>
-<li>8ビット → 256通り</li>
+<li>nビットの状態数 → <strong>2^n</strong></li>
+<li>最大値 → <strong>2^n − 1</strong></li>
 </ul>
+
 </div>
 
-<h2>ビット数と表現できる数</h2>
+<h2>ビットとは何か</h2>
+
+<p>
+ビット（bit）とは、コンピュータが情報を表現する最小単位です。
+</p>
+
+<p>
+1ビットは次の2つの状態を持ちます。
+</p>
+
+<ul>
+<li>0</li>
+<li>1</li>
+</ul>
+
+<p>
+これはスイッチの
+</p>
+
+<ul>
+<li>ON</li>
+<li>OFF</li>
+</ul>
+
+<p>
+のようなものです。
+</p>
+
+<h2>ビットが増えるとどうなるか</h2>
+
+<p>
+ビットが増えると、組み合わせの数が増えていきます。
+</p>
 
 <table>
+
 <tr>
 <th>ビット数</th>
 <th>状態数</th>
@@ -150,6 +141,12 @@ color:#666;
 </tr>
 
 <tr>
+<td>3</td>
+<td>8</td>
+<td>7</td>
+</tr>
+
+<tr>
 <td>4</td>
 <td>16</td>
 <td>15</td>
@@ -160,12 +157,24 @@ color:#666;
 <td>256</td>
 <td>255</td>
 </tr>
+
+<tr>
+<td>16</td>
+<td>65536</td>
+<td>65535</td>
+</tr>
+
 </table>
+
+<p>
+このように、ビット数が増えると状態数は
+<strong>指数関数的に増えます。</strong>
+</p>
 
 <h2>なぜ2^nになるのか</h2>
 
 <p>
-1ビットでは
+各ビットは
 </p>
 
 <ul>
@@ -174,11 +183,11 @@ color:#666;
 </ul>
 
 <p>
-の2通りです。
+の2通りを持ちます。
 </p>
 
 <p>
-2ビットでは
+例えば2ビットの場合
 </p>
 
 <ul>
@@ -189,29 +198,49 @@ color:#666;
 </ul>
 
 <p>
-つまり4通りになります。
+の4通りです。
 </p>
 
 <p>
-ビットが増えるごとに組み合わせは2倍になります。
+つまり
 </p>
 
 <p>
-そのため
+<code>2 × 2 = 4</code>
 </p>
 
 <p>
-<code>2 × 2 × 2 × ... × 2 = 2^n</code>
+になります。
 </p>
 
 <p>
-通りになります。
+3ビットなら
+</p>
+
+<p>
+<code>2 × 2 × 2 = 8</code>
+</p>
+
+<p>
+となります。
+</p>
+
+<p>
+一般化すると
+</p>
+
+<p>
+<code>2^n</code>
+</p>
+
+<p>
+になります。
 </p>
 
 <h2>最大値が2^n−1になる理由</h2>
 
 <p>
-最大値はすべてのビットが1のときです。
+最大値は、すべてのビットが1のときです。
 </p>
 
 <p>
@@ -223,7 +252,15 @@ color:#666;
 </p>
 
 <p>
-これは10進数で255になります。
+これは10進数で
+</p>
+
+<p>
+<code>255</code>
+</p>
+
+<p>
+になります。
 </p>
 
 <p>
@@ -234,42 +271,73 @@ color:#666;
 <code>2^8 − 1 = 255</code>
 </p>
 
-<h2>コダックの定理の重要性</h2>
+<p>
+です。
+</p>
+
+<h2>コンピュータでの具体例</h2>
 
 <p>
-コダックの定理はコンピュータ科学の基本原理です。
+コンピュータでは次のようなビット数がよく使われます。
 </p>
 
 <ul>
-<li>メモリ容量</li>
-<li>整数の最大値</li>
-<li>データ表現</li>
-<li>暗号</li>
-<li>プログラミング</li>
+
+<li>8ビット（1バイト）</li>
+<li>16ビット</li>
+<li>32ビット</li>
+<li>64ビット</li>
+
 </ul>
 
-<h2>よくある質問</h2>
-
-<h3>コダックの定理とは？</h3>
 <p>
-nビットで表現できる値の数は2^n個で最大値は2^n−1になります。
+例えば
 </p>
 
-<h3>どこで使われる？</h3>
+<ul>
+
+<li>8ビット → 0〜255</li>
+<li>16ビット → 0〜65535</li>
+
+</ul>
+
 <p>
-コンピュータのメモリ、整数、データ構造、暗号などで使われます。
+という範囲の整数を表現できます。
+</p>
+
+<h2>なぜこの定理が重要なのか</h2>
+
+<p>
+この原理は多くの分野で使われています。
+</p>
+
+<ul>
+
+<li>コンピュータのメモリ</li>
+<li>整数型の最大値</li>
+<li>データ圧縮</li>
+<li>暗号</li>
+<li>プログラミング</li>
+
+</ul>
+
+<p>
+つまり、コンピュータの世界では
+<strong>ほぼすべてのデータ表現がこの考え方に基づいています。</strong>
 </p>
 
 <h2>まとめ</h2>
 
 <ul>
-<li>状態数 → <strong>2^n</strong></li>
+
+<li>nビットの状態数 → <strong>2^n</strong></li>
 <li>最大値 → <strong>2^n − 1</strong></li>
+
 </ul>
 
-<footer>
-<p>© 2026 My Website</p>
-</footer>
+<p>
+これが<strong>コダックの定理</strong>です。
+</p>
 
 </body>
 </html>
