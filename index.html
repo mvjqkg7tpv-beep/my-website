@@ -394,3 +394,399 @@ RGBカラーでは各色が8ビットで表現される。
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>コダックの定理 - nビットで表せる最大値は 2^n − 1</title>
+
+<meta name="description" content="コダックの定理とは、nビットで表せる最大値が 2^n − 1 になるという法則である。2進数、情報理論、コンピュータ科学との関係を解説。">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="google-site-verification" content="googlee243c150bd36650d">
+
+<!-- MathJax 数式 -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- 構造化データ -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "コダックの定理",
+ "description": "nビットで表せる最大値は 2^n − 1 になるという法則。",
+ "author": {
+   "@type": "Person",
+   "name": "山口"
+ },
+ "about": "コンピュータ科学"
+}
+</script>
+
+<style>
+
+body{
+font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;
+background:#f8f9fa;
+margin:0;
+padding:0;
+}
+
+#container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:40px;
+}
+
+h1{
+font-size:32px;
+border-bottom:2px solid #aaa;
+padding-bottom:10px;
+}
+
+h2{
+border-bottom:1px solid #ccc;
+padding-bottom:5px;
+margin-top:40px;
+}
+
+h3{
+margin-top:25px;
+}
+
+p{
+line-height:1.7;
+}
+
+table{
+border-collapse:collapse;
+margin-top:10px;
+}
+
+table th,table td{
+border:1px solid #aaa;
+padding:8px;
+}
+
+#toc{
+background:#f1f1f1;
+padding:20px;
+border:1px solid #ccc;
+}
+
+#formula{
+font-size:30px;
+text-align:center;
+margin:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="container">
+
+<h1>コダックの定理</h1>
+
+<div id="formula">
+
+\\[
+最大値 = 2^n - 1
+\\]
+
+</div>
+
+<p>
+コダックの定理とは、ビット数と表現できる整数の最大値の関係を表す法則である。
+</p>
+
+<div id="toc">
+
+<h2>目次</h2>
+
+<ul>
+<li>概要</li>
+<li>数学的説明</li>
+<li>組み合わせ論</li>
+<li>2進数との関係</li>
+<li>具体例</li>
+<li>ビット数と最大値</li>
+<li>符号付き整数</li>
+<li>2の補数</li>
+<li>浮動小数点</li>
+<li>bit mask</li>
+<li>情報理論</li>
+<li>CPU</li>
+<li>メモリ</li>
+<li>ネットワーク</li>
+<li>カラー表現</li>
+<li>歴史</li>
+
+</ul>
+
+</div>
+
+<h2>概要</h2>
+
+<p>
+コンピュータは情報をビット列で扱う。
+ビットとは0または1の状態を持つ情報単位である。
+</p>
+
+<p>
+n個のビットが存在するとき、取り得る状態数は
+</p>
+
+<p>
+
+\\[
+2^n
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<p>
+整数は0から始まるため最大値は
+</p>
+
+<p>
+
+\\[
+2^n - 1
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<h2>数学的説明</h2>
+
+<p>
+n個のビットがあるとき、それぞれのビットは2通りの状態を持つ。
+</p>
+
+<p>
+
+\\[
+2 × 2 × 2 × ... × 2 = 2^n
+\\]
+
+</p>
+
+<p>
+この組み合わせ数が表現可能な状態数になる。
+</p>
+
+<h2>組み合わせ論</h2>
+
+<p>
+各ビットは独立した二値変数である。
+</p>
+
+<p>
+したがって状態数は指数関数的に増加する。
+</p>
+
+<h2>2進数との関係</h2>
+
+<p>
+2進数では各桁の重みは
+</p>
+
+<p>
+
+\\[
+2^0 , 2^1 , 2^2 , 2^3 ...
+\\]
+
+</p>
+
+<p>
+となる。
+</p>
+
+<h2>具体例</h2>
+
+<h3>4ビット</h3>
+
+<ul>
+
+<li>0000 = 0</li>
+<li>0001 = 1</li>
+<li>0010 = 2</li>
+<li>0011 = 3</li>
+<li>0100 = 4</li>
+<li>0101 = 5</li>
+<li>0110 = 6</li>
+<li>0111 = 7</li>
+<li>1000 = 8</li>
+<li>1001 = 9</li>
+<li>1010 = 10</li>
+<li>1011 = 11</li>
+<li>1100 = 12</li>
+<li>1101 = 13</li>
+<li>1110 = 14</li>
+<li>1111 = 15</li>
+
+</ul>
+
+<p>
+
+\\[
+最大値 = 2^4 - 1 = 15
+\\]
+
+</p>
+
+<h2>ビット数と最大値</h2>
+
+<table>
+
+<tr>
+
+<th>ビット数</th>
+<th>最大値</th>
+
+</tr>
+
+<tr><td>8</td><td>255</td></tr>
+
+<tr><td>16</td><td>65535</td></tr>
+
+<tr><td>32</td><td>4294967295</td></tr>
+
+<tr><td>64</td><td>18446744073709551615</td></tr>
+
+</table>
+
+<h2>符号付き整数</h2>
+
+<p>
+
+\\[
+-2^{n-1} 〜 2^{n-1}-1
+\\]
+
+</p>
+
+<p>
+符号付き整数では最上位ビットが符号になる。
+</p>
+
+<h2>2の補数</h2>
+
+<p>
+負数の表現には2の補数が使われる。
+</p>
+
+<h2>浮動小数点</h2>
+
+<p>
+浮動小数点数は
+</p>
+
+<ul>
+
+<li>符号</li>
+<li>指数</li>
+<li>仮数</li>
+
+</ul>
+
+<p>
+に分かれる。
+</p>
+
+<h2>bit mask</h2>
+
+<p>
+特定のビットを操作するためのビット列である。
+</p>
+
+<h2>情報理論</h2>
+
+<p>
+
+\\[
+情報量 = log_2(N)
+\\]
+
+</p>
+
+<p>
+Nは状態数である。
+</p>
+
+<h2>CPU</h2>
+
+<ul>
+
+<li>8bit</li>
+<li>16bit</li>
+<li>32bit</li>
+<li>64bit</li>
+
+</ul>
+
+<h2>メモリ</h2>
+
+<p>
+メモリアドレスはビット列で管理される。
+</p>
+
+<h2>ネットワーク</h2>
+
+<p>
+
+\\[
+IPv4 = 2^{32}
+\\]
+
+</p>
+
+<p>
+約43億のアドレスを持つ。
+</p>
+
+<h2>カラー表現</h2>
+
+<p>
+RGBカラーでは各色が8ビットで表現される。
+</p>
+
+<p>
+そのため値は0〜255になる。
+</p>
+
+<h2>歴史</h2>
+
+<p>
+2進数は17世紀に数学者
+</p>
+
+<p>
+ゴットフリート・ライプニッツ
+</p>
+
+<p>
+によって研究された。
+</p>
+
+</div>
+
+</body>
+
+</html>
