@@ -1,156 +1,275 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="-_3nbOrArPuFWlIFG_JbBZpQzsoZ1KsvwFN_WzyBPF0" />
-<title>コダックの定理 — 記号と式の解説</title>
-<script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
+
+<title>コダックの定理とは？ nビットで表現できる数と最大値(2^n − 1)</title>
+
+<meta name="description" content="コダックの定理をわかりやすく解説。nビットで表現できる値の数は2^n個で最大値は2^n−1になります。コンピュータの基本原理です。">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://mvjqkg7tpv-beep.github.io/my-website/">
+
+<meta name="google-site-verification" content="googlee243c150bd36650d.html">
+
 <style>
-body {
-    background: white;
-    color: #111;
-    font-family: "Helvetica", "Arial", sans-serif;
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    line-height: 1.8;
+
+body{
+font-family: system-ui, sans-serif;
+max-width: 850px;
+margin:auto;
+padding:25px;
+line-height:1.8;
 }
-h1 {
-    color: #222;
-    font-size: 2.4em;
-    text-align: center;
-    margin-top: 40px;
+
+h1{
+border-bottom:3px solid #333;
+padding-bottom:8px;
 }
-.mathblock {
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-    margin: 30px 0;
+
+h2{
+margin-top:45px;
 }
-h2, h3 {
-    color: #222;
-    margin-top: 30px;
+
+.box{
+background:#f4f4f4;
+padding:15px;
+border-radius:10px;
+margin:20px 0;
 }
-p {
-    margin-bottom: 18px;
+
+code{
+background:#eee;
+padding:4px 6px;
+border-radius:5px;
 }
-code {
-    background: #f5f5f5;
-    padding: 2px 4px;
-    border-radius: 4px;
+
+table{
+border-collapse:collapse;
+margin:20px 0;
 }
-pre {
-    background: #eee;
-    padding: 12px;
-    border-left: 5px solid #444;
-    overflow-x: auto;
+
+td,th{
+border:1px solid #ccc;
+padding:8px;
 }
-.example {
-    background: #fafafa;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 15px 0;
+
+footer{
+margin-top:60px;
+font-size:14px;
+color:#666;
 }
-.symbols {
-    background: #f9f9f9;
-    border-left: 5px solid #5cb85c;
-    padding: 15px;
-    margin: 15px 0;
-}
-.symbols ul {
-    list-style: none;
-    padding-left: 0;
-}
-.symbols li {
-    margin-bottom: 10px;
-}
+
 </style>
+
+<!-- Google構造化データ -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "コダックの定理",
+ "description": "nビットで表現できる値の数は2^n個で最大値は2^n−1になる。",
+ "author": {
+   "@type": "Person",
+   "name": "山口"
+ },
+ "mainEntityOfPage": "https://mvjqkg7tpv-beep.github.io/my-website/"
+}
+</script>
+
+<!-- FAQ構造化データ -->
+<script type="application/ld+json">
+{
+"@context":"https://schema.org",
+"@type":"FAQPage",
+"mainEntity":[
+{
+"@type":"Question",
+"name":"コダックの定理とは？",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"nビットで表現できる値の数は2^n個で最大値は2^n−1になるという原理です。"
+}
+},
+{
+"@type":"Question",
+"name":"なぜ2^nになるの？",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"各ビットが0か1の2通りを持つため、ビットが増えるごとに組み合わせが2倍になるからです。"
+}
+}
+]
+}
+</script>
+
 </head>
+
 <body>
 
 <h1>コダックの定理</h1>
 
-<h2 class="mathblock">
-  \[
-    \Delta \bigl(2^n - 1\bigr) = \sum_{k=0}^{n} 2^k - 1
-  \]
-</h2>
+<p>
+<strong>コダックの定理</strong>とは、
+<b>nビットで表現できる値の数は 2^n 個であり、
+最大値は 2^n − 1 になる</b>という原理です。
+</p>
 
-<h2>記号の意味と見方</h2>
-<div class="symbols">
+<div class="box">
+例
 <ul>
-<li><strong>\(\Delta\)</strong>：差分や変化量を表す記号。ここでは「最大値からの差分」を象徴。</li>
-<li><strong>2^n</strong>：nビットで表現できる全ての状態数。情報理論では「情報量の総数」を意味。</li>
-<li><strong>−1</strong>：十進数で最大値を表す際の補正。最大値 = 状態数 − 1。</li>
-<li><strong>\(\sum_{k=0}^{n} 2^k\)</strong>：各ビットの指数的寄与を累積した合計。組合せ論的には「n個の独立した0/1選択肢の総和」。</li>
-<li><strong>k</strong>：累積するビット位置のインデックス（0からnまで）。</li>
-<li><strong>n</strong>：ビット数。整数を表現するために使用するビットの総数。</li>
+<li>1ビット → 2通り</li>
+<li>2ビット → 4通り</li>
+<li>4ビット → 16通り</li>
+<li>8ビット → 256通り</li>
 </ul>
 </div>
 
-<h2>式の詳細解説</h2>
+<h2>ビット数と表現できる数</h2>
+
+<table>
+<tr>
+<th>ビット数</th>
+<th>状態数</th>
+<th>最大値</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>16</td>
+<td>15</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>256</td>
+<td>255</td>
+</tr>
+</table>
+
+<h2>なぜ2^nになるのか</h2>
+
 <p>
-コダックの定理は、nビットで表現できる状態数および最大値の構造を数学的に表現したものである。  
-左辺の \(\Delta(2^n-1)\) は最大値に対応する差分量を象徴し、右辺の \(\sum_{k=0}^{n} 2^k - 1\) は各ビット位置の値を累積した合計として解釈できる。
+1ビットでは
 </p>
 
-<h2>直感的理解の例</h2>
+<ul>
+<li>0</li>
+<li>1</li>
+</ul>
+
 <p>
-コダックの定理を指や具体的な2進数パターンで示すと、指数関数と最大値の関係を直感的に理解できる。
+の2通りです。
 </p>
-<div class="example">
-<h3>3ビットの場合</h3>
-<pre><code>
-000 = 0
-001 = 1
-010 = 2
-011 = 3
-100 = 4
-101 = 5
-110 = 6
-111 = 7
-</code></pre>
-<p>最大値 111（二進数） = 7 = 2^3 − 1。指数関数 2^3 = 8 と比較すると、「最大値 + 1 = 状態数」という関係が確認できる。</p>
-</div>
 
-<div class="example">
-<h3>4ビットの場合</h3>
-<pre><code>
-0000 = 0
-0001 = 1
-0010 = 2
-0011 = 3
-0100 = 4
-0101 = 5
-0110 = 6
-0111 = 7
-1000 = 8
-1001 = 9
-1010 = 10
-1011 = 11
-1100 = 12
-1101 = 13
-1110 = 14
-1111 = 15
-</code></pre>
-</div>
-
-<h2>応用・解釈</h2>
 <p>
-コダックの定理は単なる計算式ではなく、情報理論・組合せ論・整数表現の観点を統合している。  
-情報理論ではビット数と状態数の関係、組合せ論では0/1選択肢の総和、コンピュータ実装では整数型の最大値として解釈できる。
+2ビットでは
+</p>
+
+<ul>
+<li>00</li>
+<li>01</li>
+<li>10</li>
+<li>11</li>
+</ul>
+
+<p>
+つまり4通りになります。
+</p>
+
+<p>
+ビットが増えるごとに組み合わせは2倍になります。
+</p>
+
+<p>
+そのため
+</p>
+
+<p>
+<code>2 × 2 × 2 × ... × 2 = 2^n</code>
+</p>
+
+<p>
+通りになります。
+</p>
+
+<h2>最大値が2^n−1になる理由</h2>
+
+<p>
+最大値はすべてのビットが1のときです。
+</p>
+
+<p>
+例：8ビット
+</p>
+
+<p>
+<code>11111111</code>
+</p>
+
+<p>
+これは10進数で255になります。
+</p>
+
+<p>
+つまり
+</p>
+
+<p>
+<code>2^8 − 1 = 255</code>
+</p>
+
+<h2>コダックの定理の重要性</h2>
+
+<p>
+コダックの定理はコンピュータ科学の基本原理です。
+</p>
+
+<ul>
+<li>メモリ容量</li>
+<li>整数の最大値</li>
+<li>データ表現</li>
+<li>暗号</li>
+<li>プログラミング</li>
+</ul>
+
+<h2>よくある質問</h2>
+
+<h3>コダックの定理とは？</h3>
+<p>
+nビットで表現できる値の数は2^n個で最大値は2^n−1になります。
+</p>
+
+<h3>どこで使われる？</h3>
+<p>
+コンピュータのメモリ、整数、データ構造、暗号などで使われます。
 </p>
 
 <h2>まとめ</h2>
+
 <ul>
-<li>コダックの定理 Δ(2^n−1) = Σ(2^k−1) は nビット整数の最大値構造を象徴的に表す</li>
-<li>各記号はそれぞれ差分、状態数、指数的寄与を表しており、直感・理論・応用の三層で理解できる</li>
-<li>具体例（3ビット、4ビット）により直感的理解が可能</li>
+<li>状態数 → <strong>2^n</strong></li>
+<li>最大値 → <strong>2^n − 1</strong></li>
 </ul>
+
+<footer>
+<p>© 2026 My Website</p>
+</footer>
 
 </body>
 </html>
