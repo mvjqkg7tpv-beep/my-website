@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-
 <meta charset="UTF-8">
+<title>コダックの定理 ― 記号と式の解説</title>
 
-<title>コダックの定理</title>
+<meta name="description" content="コダックの定理とは、nビットで表現できる状態数と最大値の関係を示す数学的原理である。状態数は2^n、最大値は2^n−1となる。本ページでは式、証明、例、応用までを極めて丁寧に解説する。">
 
-<meta name="description" content="コダックの定理とは、nビットで表現できる数の最大値が 2^n − 1 になるという原理。情報理論やコンピュータ科学の基礎を解説。">
-
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<meta name="google-site-verification" content="googlee243c150bd36650d">
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
 body{
+font-family:sans-serif;
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-background:#f5f6f7;
+background:#f6f6f6;
 line-height:1.8;
 }
 
 header{
-background:#2d5ea6;
+background:#2b4a83;
 color:white;
-padding:20px;
-font-size:28px;
+padding:16px;
+font-size:22px;
 font-weight:bold;
 }
 
@@ -35,65 +29,38 @@ font-weight:bold;
 max-width:900px;
 margin:auto;
 background:white;
-padding:30px;
+padding:25px;
 }
 
-h1{font-size:34px}
+h1{
+font-size:28px;
+margin-top:0;
+}
 
 h2{
-background:#eef2f7;
-padding:12px;
-border-radius:6px;
+background:#eef3ff;
+padding:10px;
 cursor:pointer;
-margin-top:30px;
+border-left:6px solid #3f65b5;
 }
 
-.section{display:none}
+.section{
+display:none;
+padding:10px 5px 25px 5px;
+}
 
 .math{
-font-size:22px;
-background:#f1f1f1;
-padding:15px;
-border-radius:6px;
-margin:20px 0;
+background:#f3f3f3;
+padding:12px;
+margin:10px 0;
+font-family:monospace;
 }
 
-table{
-border-collapse:collapse;
-width:100%;
-}
-
-td,th{
-border:1px solid #ddd;
-padding:8px;
-text-align:center;
-}
-
-.tag{
-display:inline-block;
-background:#eee;
-padding:5px 10px;
-margin:5px;
-border-radius:6px;
-}
-
-#toc{
+.toc{
 background:#fafafa;
 border:1px solid #ddd;
 padding:15px;
-margin-bottom:30px;
-}
-
-#toc a{
-display:block;
-text-decoration:none;
-color:#2d5ea6;
-margin:4px 0;
-}
-
-a{
-color:#2d5ea6;
-text-decoration:none;
+margin-bottom:20px;
 }
 
 </style>
@@ -101,62 +68,13 @@ text-decoration:none;
 <script>
 
 function toggle(id){
-let el=document.getElementById(id);
-el.style.display = el.style.display==="block" ? "none":"block";
+let x=document.getElementById(id)
+
+if(x.style.display==="block"){
+x.style.display="none"
+}else{
+x.style.display="block"
 }
-
-window.onload=function(){
-
-let headers=document.querySelectorAll("h2");
-let toc=document.getElementById("toc");
-
-headers.forEach((h,i)=>{
-let id="sec"+i;
-h.setAttribute("onclick","toggle('"+id+"')");
-let next=h.nextElementSibling;
-next.id=id;
-next.classList.add("section");
-
-let link=document.createElement("a");
-link.href="#"+id;
-link.textContent=h.innerText;
-
-toc.appendChild(link);
-
-});
-
-}
-
-</script>
-
-<!-- FAQ構造化データ -->
-
-<script type="application/ld+json">
-
-{
-"@context": "https://schema.org",
-"@type": "FAQPage",
-"mainEntity": [
-
-{
-"@type": "Question",
-"name": "コダックの定理とは？",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"nビットで表現できる最大値が2^n−1になるという原理。"
-}
-},
-
-{
-"@type": "Question",
-"name": "なぜ最大値は2^n−1になるの？",
-"acceptedAnswer":{
-"@type":"Answer",
-"text":"数値が0から始まるため。"
-}
-}
-
-]
 
 }
 
@@ -167,264 +85,319 @@ toc.appendChild(link);
 <body>
 
 <header>
-コダックの定理
+数学を探究するもの
 </header>
 
 <div class="container">
 
-<h1>コダックの定理</h1>
+<h1>コダックの定理 ― 記号と式の解説</h1>
 
 <p>
 
-コダックの定理とは  
-<a href="#binary">2進数</a>と  
-<a href="#bit">ビット</a>の関係を説明する原理である。
+コダックの定理とは、**nビットで表現できる値の構造**を数学的に説明する原理である。  
+コンピュータ・情報理論・離散数学などで現れる極めて基本的な関係式であり、
 
 </p>
 
 <div class="math">
+状態数 = 2^n  
+最大値 = 2^n − 1
+</div>
 
-\[
-N=\sum_{i=0}^{n-1} b_i2^i
-\]
+<p>
+
+という形で表される。
+
+この定理は単なる暗記公式ではなく、
+
+・ビット列の構造  
+・数値の表現範囲  
+・情報量  
+・離散的状態の総数  
+
+など多くの概念を同時に説明する非常に重要な性質である。
+
+特にコンピュータではすべての情報が **0 と 1 の組み合わせ（ビット列）** で表現されるため、この定理はデータ構造やメモリ設計などにも深く関係している。
+
+本ページでは
+
+・定理の式  
+・数学的意味  
+・具体例  
+・証明  
+・応用  
+
+を極めて丁寧に説明する。
+
+</p>
+
+---
+
+<div class="toc">
+
+<b>目次</b>
+
+1. 定理の基本式  
+2. 状態数の意味  
+3. 最大値が 2^n−1 になる理由  
+4. Σ（シグマ）による表現  
+5. 具体例  
+6. コンピュータとの関係  
 
 </div>
+
+---
+
+<h2 onclick="toggle('s1')">1. 定理の基本式</h2>
+
+<div id="s1" class="section">
+
+コダックの定理は次の式で表される。
 
 <div class="math">
+状態数 = 2^n
+</div>
 
-\[
-最大値=2^n-1
-\]
+ここで  
+
+n = ビット数
+
+である。
+
+ビットとは **0 または 1 を表す最小単位**であり、  
+1ビットであれば
+
+<div class="math">
+0  
+1
+</div>
+
+の **2通り**が存在する。
+
+2ビットなら
+
+<div class="math">
+00  
+01  
+10  
+11
+</div>
+
+となり **4通り**になる。
+
+つまり
+
+<div class="math">
+2 × 2 = 4
+</div>
+
+である。
+
+同様に n ビットでは
+
+<div class="math">
+2 × 2 × 2 × ... × 2 = 2^n
+</div>
+
+となる。
 
 </div>
 
 ---
 
-# 目次
+<h2 onclick="toggle('s2')">2. 状態数の意味</h2>
 
-<div id="toc"></div>
+<div id="s2" class="section">
 
----
+状態数とは
 
-<h2>概要</h2>
+「取り得る全パターンの数」
 
-<div>
+である。
 
-ビットとはコンピュータが扱う最小単位であり  
+例えば
 
-<ul>
+3ビットなら
 
-<li>0</li>
-<li>1</li>
+<div class="math">
+000  
+001  
+010  
+011  
+100  
+101  
+110  
+111
+</div>
 
-</ul>
+合計 **8通り**。
 
-の2つの値を取る。
+つまり
 
-nビットある場合  
+<div class="math">
+2^3 = 8
+</div>
 
-\[
-2^n
-\]
+となる。
 
-通りの組み合わせが存在する。
+これは
+
+**組み合わせ数学の基本原理**
+
+と同じ構造を持っている。
 
 </div>
 
 ---
 
-<h2>数式図</h2>
+<h2 onclick="toggle('s3')">3. 最大値が 2^n − 1 になる理由</h2>
 
-<div>
+<div id="s3" class="section">
 
-\[
-1111_2
-\]
+nビットの最大値は
 
-\[
-=2^3+2^2+2^1+2^0
-\]
+<div class="math">
+2^n − 1
+</div>
 
-\[
-=8+4+2+1
-\]
+になる。
 
-\[
-=15
-\]
+理由は
+
+最大値 = 全ビットが1
+
+だからである。
+
+例
+
+3ビット
+
+<div class="math">
+111
+</div>
+
+これは
+
+<div class="math">
+4 + 2 + 1 = 7
+</div>
+
+つまり
+
+<div class="math">
+2^3 − 1 = 7
+</div>
+
+である。
 
 </div>
 
 ---
 
-<h2>ビット構造図</h2>
+<h2 onclick="toggle('s4')">4. Σ（シグマ）による表現</h2>
 
-<div>
+<div id="s4" class="section">
 
-<svg width="600" height="120">
+最大値は次の式でも書ける。
 
-<rect x="10" y="40" width="100" height="40" fill="#6fa8dc"/>
-<rect x="110" y="40" width="100" height="40" fill="#93c47d"/>
-<rect x="210" y="40" width="100" height="40" fill="#ffd966"/>
-<rect x="310" y="40" width="100" height="40" fill="#f6b26b"/>
+<div class="math">
+Σ_{k=0}^{n-1} 2^k
+</div>
 
-<text x="40" y="65">2³</text>
-<text x="140" y="65">2²</text>
-<text x="240" y="65">2¹</text>
-<text x="340" y="65">2⁰</text>
+これは
 
-</svg>
+<div class="math">
+1 + 2 + 4 + 8 + ... + 2^{n-1}
+</div>
+
+を意味する。
+
+等比数列の和の公式より
+
+<div class="math">
+Σ_{k=0}^{n-1} 2^k = 2^n − 1
+</div>
+
+となる。
 
 </div>
 
 ---
 
-<h2>具体例</h2>
+<h2 onclick="toggle('s5')">5. 具体例</h2>
 
-<div>
+<div id="s5" class="section">
 
-<table>
+1ビット
 
-<tr>
-<th>bit</th>
-<th>組み合わせ</th>
-<th>最大値</th>
-</tr>
+<div class="math">
+状態数 = 2  
+最大値 = 1
+</div>
 
-<tr>
-<td>4</td>
-<td>16</td>
-<td>15</td>
-</tr>
+2ビット
 
-<tr>
-<td>8</td>
-<td>256</td>
-<td>255</td>
-</tr>
+<div class="math">
+状態数 = 4  
+最大値 = 3
+</div>
 
-<tr>
-<td>16</td>
-<td>65536</td>
-<td>65535</td>
-</tr>
+3ビット
 
-<tr>
-<td>32</td>
-<td>4294967296</td>
-<td>4294967295</td>
-</tr>
+<div class="math">
+状態数 = 8  
+最大値 = 7
+</div>
 
-</table>
+8ビット
+
+<div class="math">
+状態数 = 256  
+最大値 = 255
+</div>
 
 </div>
 
 ---
 
-<h2>応用</h2>
+<h2 onclick="toggle('s6')">6. コンピュータとの関係</h2>
 
-<div>
+<div id="s6" class="section">
 
-<ul>
+コンピュータでは
 
-<li>RGBカラー (8bit = 256色)</li>
+8ビット = 1バイト
 
-<li>IPアドレス</li>
+である。
 
-<li>CPUレジスタ</li>
+そのため
 
-<li>暗号鍵</li>
+<div class="math">
+2^8 = 256
+</div>
 
-<li>メモリアドレス</li>
+となり
 
-</ul>
+表現できる数値は
+
+<div class="math">
+0 ～ 255
+</div>
+
+になる。
+
+この原理は
+
+・メモリ  
+・画像  
+・音声  
+・データ圧縮  
+
+など様々な分野で利用されている。
 
 </div>
 
 ---
-
-<h2 id="binary">2進数</h2>
-
-<div>
-
-2進数とは  
-
-0と1だけを使って数を表す数体系である。
-
-コンピュータ内部ではすべてのデータが  
-この形式で保存される。
-
-</div>
-
----
-
-<h2 id="bit">ビット</h2>
-
-<div>
-
-ビット（bit）は  
-
-Binary Digit の略であり  
-
-コンピュータが扱う最小単位である。
-
-</div>
-
----
-
-<h2>参考文献</h2>
-
-<div>
-
-<ul>
-
-<li>Claude Shannon — Information Theory</li>
-
-<li>Donald Knuth — The Art of Computer Programming</li>
-
-<li>Computer Organization and Design</li>
-
-<li>Digital Logic Design</li>
-
-</ul>
-
-</div>
-
----
-
-<h2>関連記事</h2>
-
-<div>
-
-<ul>
-
-<li>2進数</li>
-
-<li>情報理論</li>
-
-<li>ビット演算</li>
-
-<li>コンピュータアーキテクチャ</li>
-
-<li>デジタル回路</li>
-
-</ul>
-
-</div>
-
----
-
-<h2>関連タグ</h2>
-
-<div>
-
-<span class="tag">2進数</span>
-<span class="tag">ビット</span>
-<span class="tag">情報理論</span>
-<span class="tag">コンピュータ科学</span>
-<span class="tag">デジタル回路</span>
-
-</div>
 
 </div>
 
