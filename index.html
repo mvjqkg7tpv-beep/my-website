@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
 <meta charset="UTF-8">
+
 <title>コダックの定理</title>
+
+<meta name="description" content="コダックの定理とは、nビットで表現できる数の最大値が 2^n − 1 になるという原理。情報理論やコンピュータ科学の基礎を解説。">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="google-site-verification" content="googlee243c150bd36650d">
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 
 body{
-font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 background:#f5f6f7;
 line-height:1.8;
 }
@@ -28,36 +38,29 @@ background:white;
 padding:30px;
 }
 
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
+h1{font-size:34px}
 
 h2{
 background:#eef2f7;
 padding:12px;
-cursor:pointer;
 border-radius:6px;
+cursor:pointer;
 margin-top:30px;
 }
 
-.section{
-display:none;
-padding:10px 5px;
-}
+.section{display:none}
 
 .math{
 font-size:22px;
 background:#f1f1f1;
 padding:15px;
 border-radius:6px;
-margin:15px 0;
+margin:20px 0;
 }
 
 table{
 border-collapse:collapse;
 width:100%;
-margin-top:10px;
 }
 
 td,th{
@@ -69,10 +72,28 @@ text-align:center;
 .tag{
 display:inline-block;
 background:#eee;
-padding:4px 8px;
-margin:4px;
-border-radius:5px;
-font-size:14px;
+padding:5px 10px;
+margin:5px;
+border-radius:6px;
+}
+
+#toc{
+background:#fafafa;
+border:1px solid #ddd;
+padding:15px;
+margin-bottom:30px;
+}
+
+#toc a{
+display:block;
+text-decoration:none;
+color:#2d5ea6;
+margin:4px 0;
+}
+
+a{
+color:#2d5ea6;
+text-decoration:none;
 }
 
 </style>
@@ -81,11 +102,62 @@ font-size:14px;
 
 function toggle(id){
 let el=document.getElementById(id);
-if(el.style.display==="none"){
-el.style.display="block";
-}else{
-el.style.display="none";
+el.style.display = el.style.display==="block" ? "none":"block";
 }
+
+window.onload=function(){
+
+let headers=document.querySelectorAll("h2");
+let toc=document.getElementById("toc");
+
+headers.forEach((h,i)=>{
+let id="sec"+i;
+h.setAttribute("onclick","toggle('"+id+"')");
+let next=h.nextElementSibling;
+next.id=id;
+next.classList.add("section");
+
+let link=document.createElement("a");
+link.href="#"+id;
+link.textContent=h.innerText;
+
+toc.appendChild(link);
+
+});
+
+}
+
+</script>
+
+<!-- FAQ構造化データ -->
+
+<script type="application/ld+json">
+
+{
+"@context": "https://schema.org",
+"@type": "FAQPage",
+"mainEntity": [
+
+{
+"@type": "Question",
+"name": "コダックの定理とは？",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"nビットで表現できる最大値が2^n−1になるという原理。"
+}
+},
+
+{
+"@type": "Question",
+"name": "なぜ最大値は2^n−1になるの？",
+"acceptedAnswer":{
+"@type":"Answer",
+"text":"数値が0から始まるため。"
+}
+}
+
+]
+
 }
 
 </script>
@@ -94,173 +166,153 @@ el.style.display="none";
 
 <body>
 
+<header>
+コダックの定理
+</header>
 
 <div class="container">
 
 <h1>コダックの定理</h1>
 
 <p>
-コダックの定理とは、<br>
-<b>nビットで表せる値の個数は2ⁿ個であり、最大値は2ⁿ−1になる</b>という法則である。  
-主にコンピュータ・情報科学・デジタル回路などで登場する基本原理であり、  
-ビット数と表現可能範囲の関係を示す。
+
+コダックの定理とは  
+<a href="#binary">2進数</a>と  
+<a href="#bit">ビット</a>の関係を説明する原理である。
+
 </p>
 
 <div class="math">
-個数 = 2ⁿ  
-最大値 = 2ⁿ − 1
+
+\[
+N=\sum_{i=0}^{n-1} b_i2^i
+\]
+
+</div>
+
+<div class="math">
+
+\[
+最大値=2^n-1
+\]
+
 </div>
 
 ---
 
-<h2 onclick="toggle('sec1')">概要</h2>
+# 目次
 
-<div id="sec1" class="section">
+<div id="toc"></div>
 
-<p>
+---
 
-コンピュータでは情報はビットで表される。  
-ビットは
+<h2>概要</h2>
 
-</p>
+<div>
+
+ビットとはコンピュータが扱う最小単位であり  
 
 <ul>
+
 <li>0</li>
 <li>1</li>
+
 </ul>
 
-の二種類しかとらない。
+の2つの値を取る。
 
-そのため、
+nビットある場合  
 
-nビットあると  
-すべての組み合わせは
+\[
+2^n
+\]
 
-<div class="math">
-2 × 2 × 2 × ... × 2  
-= 2ⁿ
-</div>
-
-となる。
-
-つまり
-
-<table>
-<tr>
-<th>ビット数</th>
-<th>表せる数</th>
-</tr>
-
-<tr>
-<td>1bit</td>
-<td>2</td>
-</tr>
-
-<tr>
-<td>2bit</td>
-<td>4</td>
-</tr>
-
-<tr>
-<td>3bit</td>
-<td>8</td>
-</tr>
-
-<tr>
-<td>4bit</td>
-<td>16</td>
-</tr>
-
-<tr>
-<td>8bit</td>
-<td>256</td>
-</tr>
-
-</table>
+通りの組み合わせが存在する。
 
 </div>
 
 ---
 
-<h2 onclick="toggle('sec2')">最大値の理由</h2>
+<h2>数式図</h2>
 
-<div id="sec2" class="section">
+<div>
 
-最大値は
+\[
+1111_2
+\]
 
-<div class="math">
-2ⁿ − 1
-</div>
+\[
+=2^3+2^2+2^1+2^0
+\]
 
-になる。
+\[
+=8+4+2+1
+\]
 
-理由は
-
-<p>
-数は <b>0から始まる</b>ためである。
-</p>
-
-例：
-
-3ビット
-000
-001
-010
-011
-100
-101
-110
-111
-最大は
-
-<div class="math">
-111₂ = 7
-</div>
-
-つまり
-
-<div class="math">
-2³ − 1 = 7
-</div>
+\[
+=15
+\]
 
 </div>
 
 ---
 
-<h2 onclick="toggle('sec3')">具体例</h2>
+<h2>ビット構造図</h2>
 
-<div id="sec3" class="section">
+<div>
+
+<svg width="600" height="120">
+
+<rect x="10" y="40" width="100" height="40" fill="#6fa8dc"/>
+<rect x="110" y="40" width="100" height="40" fill="#93c47d"/>
+<rect x="210" y="40" width="100" height="40" fill="#ffd966"/>
+<rect x="310" y="40" width="100" height="40" fill="#f6b26b"/>
+
+<text x="40" y="65">2³</text>
+<text x="140" y="65">2²</text>
+<text x="240" y="65">2¹</text>
+<text x="340" y="65">2⁰</text>
+
+</svg>
+
+</div>
+
+---
+
+<h2>具体例</h2>
+
+<div>
 
 <table>
 
 <tr>
 <th>bit</th>
+<th>組み合わせ</th>
 <th>最大値</th>
 </tr>
 
 <tr>
 <td>4</td>
+<td>16</td>
 <td>15</td>
 </tr>
 
 <tr>
 <td>8</td>
+<td>256</td>
 <td>255</td>
 </tr>
 
 <tr>
 <td>16</td>
+<td>65536</td>
 <td>65535</td>
 </tr>
 
 <tr>
 <td>32</td>
+<td>4294967296</td>
 <td>4294967295</td>
-</tr>
-
-<tr>
-<td>64</td>
-<td>18446744073709551615</td>
 </tr>
 
 </table>
@@ -269,67 +321,108 @@ nビットあると
 
 ---
 
-<h2 onclick="toggle('sec4')">応用</h2>
+<h2>応用</h2>
 
-<div id="sec4" class="section">
-
-この原理は多くの分野で使われる。
+<div>
 
 <ul>
 
-<li>コンピュータメモリ</li>
+<li>RGBカラー (8bit = 256色)</li>
 
-<li>画像の色数</li>
-
-<li>ネットワークIP</li>
+<li>IPアドレス</li>
 
 <li>CPUレジスタ</li>
 
-<li>ファイルサイズ制限</li>
+<li>暗号鍵</li>
 
-<li>暗号鍵長</li>
+<li>メモリアドレス</li>
 
 </ul>
-
-例：
-
-8bitカラー
-
-<div class="math">
-2⁸ = 256色
-</div>
 
 </div>
 
 ---
 
-<h2 onclick="toggle('sec5')">関連タグ</h2>
+<h2 id="binary">2進数</h2>
 
-<div id="sec5" class="section">
+<div>
+
+2進数とは  
+
+0と1だけを使って数を表す数体系である。
+
+コンピュータ内部ではすべてのデータが  
+この形式で保存される。
+
+</div>
+
+---
+
+<h2 id="bit">ビット</h2>
+
+<div>
+
+ビット（bit）は  
+
+Binary Digit の略であり  
+
+コンピュータが扱う最小単位である。
+
+</div>
+
+---
+
+<h2>参考文献</h2>
+
+<div>
+
+<ul>
+
+<li>Claude Shannon — Information Theory</li>
+
+<li>Donald Knuth — The Art of Computer Programming</li>
+
+<li>Computer Organization and Design</li>
+
+<li>Digital Logic Design</li>
+
+</ul>
+
+</div>
+
+---
+
+<h2>関連記事</h2>
+
+<div>
+
+<ul>
+
+<li>2進数</li>
+
+<li>情報理論</li>
+
+<li>ビット演算</li>
+
+<li>コンピュータアーキテクチャ</li>
+
+<li>デジタル回路</li>
+
+</ul>
+
+</div>
+
+---
+
+<h2>関連タグ</h2>
+
+<div>
 
 <span class="tag">2進数</span>
 <span class="tag">ビット</span>
 <span class="tag">情報理論</span>
-<span class="tag">デジタル回路</span>
 <span class="tag">コンピュータ科学</span>
-
-</div>
-
----
-
-<h2 onclick="toggle('sec6')">まとめ</h2>
-
-<div id="sec6" class="section">
-
-コダックの定理は
-
-<div class="math">
-個数 = 2ⁿ  
-最大値 = 2ⁿ − 1
-</div>
-
-という単純な式で  
-コンピュータの数表現を説明する重要な法則である。
+<span class="tag">デジタル回路</span>
 
 </div>
 
