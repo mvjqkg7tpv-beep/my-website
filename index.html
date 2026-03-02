@@ -2,404 +2,423 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>コダックの定理 ― 記号と式の解説</title>
 
-<meta name="description" content="コダックの定理とは、nビットで表現できる状態数と最大値の関係を示す数学的原理である。状態数は2^n、最大値は2^n−1となる。本ページでは式、証明、例、応用までを極めて丁寧に解説する。">
+<title>コダックの定理｜数式と仕組みの完全解説</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="コダックの定理とは、nビットで表せる数の個数が2^n個になり、最大値が2^n-1になるという原理を説明するものです。数式・具体例・演習問題付きで詳しく解説します。">
+
+<meta name="keywords" content="コダックの定理,ビット,二進数,2^n,コンピュータ数学">
+
+<meta property="og:site_name" content="数学を探究するもの">
+
+<link rel="icon" href="favicon.ico">
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 
 body{
 font-family:sans-serif;
-margin:0;
-background:#f6f6f6;
-line-height:1.8;
-}
-
-header{
-background:#2b4a83;
-color:white;
-padding:16px;
-font-size:22px;
-font-weight:bold;
-}
-
-.container{
+line-height:1.9;
+margin:40px;
 max-width:900px;
-margin:auto;
-background:white;
-padding:25px;
 }
 
 h1{
-font-size:28px;
-margin-top:0;
+font-size:34px;
 }
 
 h2{
-background:#eef3ff;
-padding:10px;
+margin-top:50px;
+border-bottom:2px solid #ddd;
+padding-bottom:5px;
+}
+
+details{
+margin-top:15px;
+}
+
+summary{
+font-size:20px;
 cursor:pointer;
-border-left:6px solid #3f65b5;
+font-weight:bold;
 }
 
-.section{
-display:none;
-padding:10px 5px 25px 5px;
-}
-
-.math{
-background:#f3f3f3;
-padding:12px;
-margin:10px 0;
-font-family:monospace;
-}
-
-.toc{
-background:#fafafa;
-border:1px solid #ddd;
+.box{
+background:#f6f6f6;
 padding:15px;
-margin-bottom:20px;
+border-radius:8px;
+margin-top:15px;
+}
+
+.problem{
+background:#eef5ff;
+padding:15px;
+border-radius:8px;
+margin-top:20px;
+}
+
+.answer{
+background:#f4fff4;
+padding:15px;
+border-radius:8px;
+margin-top:10px;
 }
 
 </style>
-
-<script>
-
-function toggle(id){
-let x=document.getElementById(id)
-
-if(x.style.display==="block"){
-x.style.display="none"
-}else{
-x.style.display="block"
-}
-
-}
-
-</script>
-
 </head>
 
 <body>
 
-<header>
-数学を探究するもの
-</header>
-
-<div class="container">
-
-<h1>コダックの定理 ― 記号と式の解説</h1>
+<h1>コダックの定理</h1>
 
 <p>
 
-コダックの定理とは、**nビットで表現できる値の構造**を数学的に説明する原理である。  
-コンピュータ・情報理論・離散数学などで現れる極めて基本的な関係式であり、
+コダックの定理とは、コンピュータで使われるビット数と、
+表現できる整数の範囲の関係を表す基本的な法則である。
 
 </p>
 
-<div class="math">
-状態数 = 2^n  
-最大値 = 2^n − 1
-</div>
+<h2>基本式</h2>
 
 <p>
 
-という形で表される。
+\[
+\text{表せる数の個数} = 2^n
+\]
 
-この定理は単なる暗記公式ではなく、
-
-・ビット列の構造  
-・数値の表現範囲  
-・情報量  
-・離散的状態の総数  
-
-など多くの概念を同時に説明する非常に重要な性質である。
-
-特にコンピュータではすべての情報が **0 と 1 の組み合わせ（ビット列）** で表現されるため、この定理はデータ構造やメモリ設計などにも深く関係している。
-
-本ページでは
-
-・定理の式  
-・数学的意味  
-・具体例  
-・証明  
-・応用  
-
-を極めて丁寧に説明する。
+\[
+\text{最大値} = 2^n - 1
+\]
 
 </p>
 
----
+<p>
 
-<div class="toc">
+ここで \(n\) はビット数を表す。
 
-<b>目次</b>
+</p>
 
-1. 定理の基本式  
-2. 状態数の意味  
-3. 最大値が 2^n−1 になる理由  
-4. Σ（シグマ）による表現  
-5. 具体例  
-6. コンピュータとの関係  
 
-</div>
+<h2>目次</h2>
 
----
+<ul>
+<li>ビットと二進数</li>
+<li>なぜ \(2^n\) 個になるのか</li>
+<li>最大値が \(2^n-1\) になる理由</li>
+<li>具体例</li>
+<li>演習問題</li>
+</ul>
 
-<h2 onclick="toggle('s1')">1. 定理の基本式</h2>
 
-<div id="s1" class="section">
 
-コダックの定理は次の式で表される。
+<details>
+<summary>ビットと二進数</summary>
 
-<div class="math">
-状態数 = 2^n
-</div>
+<p>
 
-ここで  
+コンピュータは十進数ではなく
+<b>二進数</b>を使って数を表現する。
 
-n = ビット数
+二進数では、数字は
 
-である。
+\[
+0 \quad と \quad 1
+\]
 
-ビットとは **0 または 1 を表す最小単位**であり、  
-1ビットであれば
+の2種類しか存在しない。
 
-<div class="math">
-0  
-1
-</div>
+そのため1桁は
 
-の **2通り**が存在する。
+\[
+2 \text{通り}
+\]
 
-2ビットなら
+の状態を持つ。
 
-<div class="math">
-00  
-01  
-10  
-11
-</div>
+</p>
 
-となり **4通り**になる。
+<div class="box">
 
-つまり
+<b>用語解説</b>
 
-<div class="math">
-2 × 2 = 4
-</div>
+ビット(bit)：  
+コンピュータの最小の情報単位。  
+値は \(0\) または \(1\) のどちらかになる。
 
-である。
-
-同様に n ビットでは
-
-<div class="math">
-2 × 2 × 2 × ... × 2 = 2^n
-</div>
-
-となる。
+二進数：  
+0と1だけで数を表す記数法。
 
 </div>
 
----
+</details>
 
-<h2 onclick="toggle('s2')">2. 状態数の意味</h2>
 
-<div id="s2" class="section">
 
-状態数とは
+<details>
+<summary>なぜ \(2^n\) 個になるのか</summary>
 
-「取り得る全パターンの数」
+<p>
 
-である。
+1ビットは
 
-例えば
+\[
+2
+\]
 
-3ビットなら
+通り。
 
-<div class="math">
-000  
-001  
-010  
-011  
-100  
-101  
-110  
-111
-</div>
+2ビットになると
 
-合計 **8通り**。
+\[
+2 \times 2
+\]
 
-つまり
+通り。
 
-<div class="math">
+3ビットになると
+
+\[
+2 \times 2 \times 2
+\]
+
+通りになる。
+
+</p>
+
+<p>
+
+よって一般化すると
+
+\[
+2^n
+\]
+
+通りになる。
+
+</p>
+
+</details>
+
+
+
+<details>
+<summary>最大値が \(2^n-1\) になる理由</summary>
+
+<p>
+
+例えば3ビットの場合
+
+</p>
+
+<p>
+
+\[
+000 = 0
+\]
+
+\[
+001 = 1
+\]
+
+\[
+010 = 2
+\]
+
+\[
+011 = 3
+\]
+
+\[
+100 = 4
+\]
+
+\[
+101 = 5
+\]
+
+\[
+110 = 6
+\]
+
+\[
+111 = 7
+\]
+
+</p>
+
+<p>
+
+表せる数は
+
+\[
 2^3 = 8
-</div>
+\]
 
-となる。
+個だが、  
+数は \(0\) から始まるため
 
-これは
+</p>
 
-**組み合わせ数学の基本原理**
+<p>
 
-と同じ構造を持っている。
+最大値は
 
-</div>
-
----
-
-<h2 onclick="toggle('s3')">3. 最大値が 2^n − 1 になる理由</h2>
-
-<div id="s3" class="section">
-
-nビットの最大値は
-
-<div class="math">
-2^n − 1
-</div>
+\[
+7
+\]
 
 になる。
 
-理由は
+</p>
 
-最大値 = 全ビットが1
-
-だからである。
-
-例
-
-3ビット
-
-<div class="math">
-111
-</div>
-
-これは
-
-<div class="math">
-4 + 2 + 1 = 7
-</div>
+<p>
 
 つまり
 
-<div class="math">
-2^3 − 1 = 7
-</div>
+\[
+2^3 - 1
+\]
 
 である。
 
-</div>
+</p>
 
----
+</details>
 
-<h2 onclick="toggle('s4')">4. Σ（シグマ）による表現</h2>
 
-<div id="s4" class="section">
 
-最大値は次の式でも書ける。
+<details>
+<summary>具体例</summary>
 
-<div class="math">
-Σ_{k=0}^{n-1} 2^k
-</div>
+<p>
 
-これは
+8ビットの場合
 
-<div class="math">
-1 + 2 + 4 + 8 + ... + 2^{n-1}
-</div>
+</p>
 
-を意味する。
+<p>
 
-等比数列の和の公式より
-
-<div class="math">
-Σ_{k=0}^{n-1} 2^k = 2^n − 1
-</div>
-
-となる。
-
-</div>
-
----
-
-<h2 onclick="toggle('s5')">5. 具体例</h2>
-
-<div id="s5" class="section">
-
-1ビット
-
-<div class="math">
-状態数 = 2  
-最大値 = 1
-</div>
-
-2ビット
-
-<div class="math">
-状態数 = 4  
-最大値 = 3
-</div>
-
-3ビット
-
-<div class="math">
-状態数 = 8  
-最大値 = 7
-</div>
-
-8ビット
-
-<div class="math">
-状態数 = 256  
-最大値 = 255
-</div>
-
-</div>
-
----
-
-<h2 onclick="toggle('s6')">6. コンピュータとの関係</h2>
-
-<div id="s6" class="section">
-
-コンピュータでは
-
-8ビット = 1バイト
-
-である。
-
-そのため
-
-<div class="math">
+\[
 2^8 = 256
+\]
+
+</p>
+
+<p>
+
+表せる数は256個。
+
+</p>
+
+<p>
+
+最大値は
+
+</p>
+
+<p>
+
+\[
+2^8 - 1 = 255
+\]
+
+</p>
+
+</details>
+
+
+
+<details>
+<summary>演習問題</summary>
+
+<div class="problem">
+
+<b>問題1</b>
+
+4ビットで表せる数の個数を求めよ。
+
 </div>
 
-となり
+<details>
+<summary>解答と解説</summary>
 
-表現できる数値は
+<div class="answer">
 
-<div class="math">
-0 ～ 255
+ビット数は \(n=4\)
+
+式に代入する。
+
+\[
+2^n
+\]
+
+\[
+2^4
+\]
+
+\[
+= 16
+\]
+
+よって
+
+表せる数の個数は
+
+\[
+16
+\]
+
+である。
+
 </div>
 
-になる。
+</details>
 
-この原理は
 
-・メモリ  
-・画像  
-・音声  
-・データ圧縮  
+<div class="problem">
 
-など様々な分野で利用されている。
+<b>問題2</b>
+
+5ビットで表せる最大値を求めよ。
 
 </div>
 
----
+<details>
+<summary>解答と解説</summary>
+
+<div class="answer">
+
+最大値は
+
+\[
+2^n - 1
+\]
+
+で求められる。
+
+\[
+2^5 = 32
+\]
+
+\[
+32 - 1 = 31
+\]
+
+よって最大値は
+
+\[
+31
+\]
+
+である。
 
 </div>
+
+</details>
+
+</details>
+
 
 </body>
 </html>
