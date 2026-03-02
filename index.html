@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
 
-<title>コダックの定理 | 数学を探究するもの</title>
+<title>コダックの定理 ― 記号と式の完全解説</title>
+
+<meta name="description" content="コダックの定理とは、nビットで表せる数の個数が2^n、最大値が2^n-1になるという数学的性質を説明するページです。">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -11,84 +17,108 @@
 
 body{
 font-family:serif;
-line-height:2;
-font-size:20px;
+font-size:28px;
+line-height:1.9;
 margin:0;
-background:#fff;
+background:white;
+color:#111;
 }
 
-.layout{
-display:flex;
-max-width:1300px;
+.container{
+max-width:1000px;
 margin:auto;
-}
-
-.sidebar{
-width:260px;
-padding:30px;
-background:#fafafa;
-border-right:1px solid #ddd;
-position:sticky;
-top:0;
-height:100vh;
-font-size:18px;
-}
-
-.sidebar a{
-display:block;
-margin:12px 0;
-color:#333;
-text-decoration:none;
-}
-
-.content{
-flex:1;
-padding:60px;
-max-width:900px;
+padding:40px;
 }
 
 h1{
-font-size:42px;
+font-size:50px;
+margin-bottom:20px;
 }
 
 h2{
-margin-top:70px;
+font-size:40px;
+margin-top:80px;
+border-bottom:3px solid #ddd;
+padding-bottom:10px;
+}
+
+nav{
+background:#f5f5f5;
+padding:20px;
 border-bottom:2px solid #ddd;
-padding-bottom:8px;
+}
+
+nav a{
+margin-right:25px;
+text-decoration:none;
+font-size:22px;
+color:black;
 }
 
 .formula{
-font-size:32px;
+font-size:40px;
 text-align:center;
-background:#f5f5f5;
+background:#f3f3f3;
+padding:40px;
+border-radius:10px;
+margin:50px 0;
+}
+
+.box{
+background:#fafafa;
+border-left:6px solid black;
 padding:30px;
-border-radius:8px;
 margin:40px 0;
 }
 
-.block{
-border-left:6px solid #333;
-background:#f9f9f9;
-padding:25px;
-margin:30px 0;
+.bit-table{
+font-size:26px;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.bit-table td,.bit-table th{
+border:1px solid #333;
+padding:10px 18px;
+text-align:center;
 }
 
 .exercise{
-background:#eef4ff;
-padding:25px;
-border-radius:8px;
-margin-top:30px;
+background:#eef3ff;
+padding:30px;
+border-radius:10px;
+margin-top:40px;
 }
 
 .answer{
-background:#f0fff0;
-padding:20px;
-margin-top:15px;
+background:#eaffea;
+padding:25px;
+margin-top:20px;
 }
 
 summary{
+font-size:26px;
 cursor:pointer;
 font-weight:bold;
+}
+
+.calc{
+background:#fff4e6;
+padding:30px;
+border-radius:10px;
+margin-top:40px;
+}
+
+input{
+font-size:24px;
+padding:8px;
+width:120px;
+}
+
+button{
+font-size:24px;
+padding:10px 20px;
+margin-left:10px;
 }
 
 </style>
@@ -97,113 +127,118 @@ font-weight:bold;
 
 <body>
 
-<div class="layout">
-
-<div class="sidebar">
-
-<b>目次</b>
+<nav>
 
 <a href="#formula">基本式</a>
-<a href="#idea">直感</a>
 <a href="#definition">定義</a>
 <a href="#theorem">定理</a>
 <a href="#proof">証明</a>
 <a href="#example">例</a>
+<a href="#table">ビット表</a>
 <a href="#exercise">演習</a>
+<a href="#calc">計算ツール</a>
+<a href="#terms">用語</a>
 
-</div>
+</nav>
 
 
-<div class="content">
+<div class="container">
+
 
 <h1>コダックの定理</h1>
+
+<p>
+
+コダックの定理とは、コンピュータの二進数表現において  
+**nビットで表現できる整数の個数と最大値**を数学的に表す性質である。
+
+</p>
+
+<p>
+
+コンピュータは情報をすべて **0 と 1 の列（二進数）**で表現する。  
+このとき、ビット数が増えると表せる数の範囲は指数関数的に増加する。
+
+</p>
+
 
 
 <h2 id="formula">基本式</h2>
 
 <div class="formula">
 
-[
+\[
+|\{0,1\}^n| = 2^n
+\]
+
+\[
+\prod_{i=1}^{n}2 = 2^n
+\]
+
+\[
 \sum_{i=0}^{n-1}2^i = 2^n - 1
-]
+\]
 
-[
-|{0,1}^n| = 2^n
-]
-
-[
-\Delta_{\max}=2^n-1
-]
+\[
+\Delta_{max} = 2^n - 1
+\]
 
 </div>
 
 <p>
-nビットの二進数では、それぞれの桁が0または1のどちらかを取る。  
-したがって可能な組み合わせ数は指数関数的に増加する。
+
+ここで  
+n はビット数を表す。
+
 </p>
-
-
-
-<h2 id="idea">直感</h2>
 
 <p>
-1ビットなら0か1の2通り。  
-2ビットなら00,01,10,11の4通り。  
-3ビットなら8通り。  
 
-つまりビットが1つ増えるごとに可能な状態は2倍になる。
+つまり
+
 </p>
 
-[
-2 \times 2 \times 2 \times \cdots = 2^n
-]
+<ul>
+
+<li>表現できる数の個数 → \(2^n\)</li>
+
+<li>最大値 → \(2^n-1\)</li>
+
+</ul>
+
+<p>
+
+となる。
+
+</p>
 
 
 
 <h2 id="definition">定義</h2>
 
-<div class="block">
+<div class="box">
 
 <p>
 
-nビットの二進数とは、  
-n個のビット
-
-[
-b_0,b_1,b_2,\dots,b_{n-1}
-]
-
-から構成される数である。
+nビットの二進数とは次のビット列である。
 
 </p>
 
+\[
+(b_{n-1}, b_{n-2}, \dots , b_1 , b_0)
+\]
+
 <p>
 
-このとき値は
-
-[
-\sum_{i=0}^{n-1} b_i 2^i
-]
-
-で表される。
+各ビットは
 
 </p>
 
-</div>
-
-
-
-<h2 id="theorem">定理</h2>
-
-<div class="block">
+\[
+b_i \in \{0,1\}
+\]
 
 <p>
-
-nビットの二進数で表せる整数の個数は
-
-[
-2^n
-]
 
 である。
 
@@ -211,11 +246,62 @@ nビットの二進数で表せる整数の個数は
 
 <p>
 
-また最大値は
+このビット列が表す整数値は
 
-[
+</p>
+
+\[
+\sum_{i=0}^{n-1} b_i 2^i
+\]
+
+<p>
+
+で定義される。
+
+</p>
+
+</div>
+<h2 id="theorem">定理</h2>
+
+<div class="box">
+
+<p>
+
+nビットの二進数で表現できる整数の個数は
+
+</p>
+
+\[
+2^n
+\]
+
+<p>
+
+である。
+
+</p>
+
+<p>
+
+また、表現できる最大の整数は
+
+</p>
+
+\[
+\sum_{i=0}^{n-1}2^i
+\]
+
+<p>
+
+であり、これは等比数列の和の公式から
+
+</p>
+
+\[
 2^n-1
-]
+\]
+
+<p>
 
 となる。
 
@@ -227,33 +313,35 @@ nビットの二進数で表せる整数の個数は
 
 <h2 id="proof">証明</h2>
 
-<div class="block">
+<div class="box">
 
 <p>
 
 各ビットは
 
-[
-b_i \in {0,1}
-]
+</p>
 
-を取る。
+\[
+b_i \in \{0,1\}
+\]
+
+<p>
+
+の2通りの値を取る。
 
 </p>
 
 <p>
 
-したがって組み合わせ数は
+したがって n 個のビットの組み合わせ数は
 
-[
-2 \times 2 \times \cdots \times 2
-]
+</p>
 
-であり
+\[
+2 \times 2 \times 2 \times \dots \times 2
+\]
 
-[
-2^n
-]
+<p>
 
 となる。
 
@@ -261,27 +349,63 @@ b_i \in {0,1}
 
 <p>
 
-さらに最大値は
+これを総乗記号で表すと
 
 </p>
 
-[
+\[
+\prod_{i=1}^{n}2
+\]
+
+<p>
+
+であり
+
+</p>
+
+\[
+2^n
+\]
+
+<p>
+
+となる。
+
+</p>
+
+<p>
+
+最大値はすべてのビットが1のときである。
+
+</p>
+
+\[
+111\dots111_2
+\]
+
+<p>
+
+この値は
+
+</p>
+
+\[
 \sum_{i=0}^{n-1}2^i
-]
+\]
 
 <p>
 
-であり、等比数列の和から
+であり、等比数列の和の公式より
 
 </p>
 
-[
-\sum_{i=0}^{n-1}2^i = 2^n-1
-]
+\[
+2^n-1
+\]
 
 <p>
 
-が成立する。
+となる。
 
 </p>
 
@@ -289,25 +413,59 @@ b_i \in {0,1}
 
 
 
-<h2 id="example">例</h2>
+<h2 id="example">具体例</h2>
 
 <p>
 
-3ビットの場合
+ビット数が増えると、表せる数の範囲は指数関数的に増える。
 
 </p>
 
-[
-000,001,010,011,100,101,110,111
-]
+<h3>3ビットの場合</h3>
+
+\[
+000
+\]
+
+\[
+001
+\]
+
+\[
+010
+\]
+
+\[
+011
+\]
+
+\[
+100
+\]
+
+\[
+101
+\]
+
+\[
+110
+\]
+
+\[
+111
+\]
 
 <p>
 
-合計
+全部で
 
-[
-2^3 = 8
-]
+</p>
+
+\[
+2^3=8
+\]
+
+<p>
 
 通り存在する。
 
@@ -317,40 +475,174 @@ b_i \in {0,1}
 
 最大値は
 
-[
-111_2 = 7
-]
+</p>
 
-である。
+\[
+111_2
+\]
+
+<p>
+
+であり
+
+</p>
+
+\[
+2^3-1=7
+\]
+
+<p>
+
+となる。
 
 </p>
 
 
 
-<h2 id="exercise">演習</h2>
-
-<div class="exercise">
+<h3>4ビットの場合</h3>
 
 <p>
 
-問1：  
-8ビットで表せる整数の最大値を求めよ。
+表現できる数の個数
+
+</p>
+
+\[
+2^4 = 16
+\]
+
+<p>
+
+最大値
+
+</p>
+
+\[
+2^4-1=15
+\]
+
+
+
+<h3>8ビットの場合</h3>
+
+<p>
+
+表現できる数の個数
+
+</p>
+
+\[
+2^8=256
+\]
+
+<p>
+
+最大値
+
+</p>
+
+\[
+2^8-1=255
+\]
+
+
+
+<h2 id="table">ビット表</h2>
+
+<table class="bit-table">
+
+<tr>
+
+<th>ビット数</th>
+<th>表せる数の個数</th>
+<th>最大値</th>
+
+</tr>
+
+<tr>
+
+<td>1</td>
+<td>2</td>
+<td>1</td>
+
+</tr>
+
+<tr>
+
+<td>2</td>
+<td>4</td>
+<td>3</td>
+
+</tr>
+
+<tr>
+
+<td>3</td>
+<td>8</td>
+<td>7</td>
+
+</tr>
+
+<tr>
+
+<td>4</td>
+<td>16</td>
+<td>15</td>
+
+</tr>
+
+<tr>
+
+<td>8</td>
+<td>256</td>
+<td>255</td>
+
+</tr>
+
+<tr>
+
+<td>16</td>
+<td>65536</td>
+<td>65535</td>
+
+</tr>
+
+<tr>
+
+<td>32</td>
+<td>4294967296</td>
+<td>4294967295</td>
+
+</tr>
+
+</table>
+<h2 id="exercise">演習問題</h2>
+
+<div class="exercise">
+
+<p><b>問題1</b></p>
+
+<p>
+
+5ビットで表現できる整数の個数を求めよ。
 
 </p>
 
 <details>
 
-<summary>解答</summary>
+<summary>解答を見る</summary>
 
 <div class="answer">
 
-[
-2^8-1
-]
+\[
+2^5
+\]
 
-[
-256-1=255
-]
+\[
+= 32
+\]
+
+したがって **32通り** 表現できる。
 
 </div>
 
@@ -359,7 +651,212 @@ b_i \in {0,1}
 </div>
 
 
+
+<div class="exercise">
+
+<p><b>問題2</b></p>
+
+<p>
+
+6ビットで表現できる最大値を求めよ。
+
+</p>
+
+<details>
+
+<summary>解答を見る</summary>
+
+<div class="answer">
+
+最大値は
+
+\[
+2^n-1
+\]
+
+n=6 を代入すると
+
+\[
+2^6-1
+\]
+
+\[
+64-1
+\]
+
+\[
+63
+\]
+
+したがって **最大値は63** となる。
+
 </div>
+
+</details>
+
+</div>
+
+
+
+<div class="exercise">
+
+<p><b>問題3</b></p>
+
+<p>
+
+10ビットで表現できる整数の個数と最大値を求めよ。
+
+</p>
+
+<details>
+
+<summary>解答を見る</summary>
+
+<div class="answer">
+
+個数
+
+\[
+2^{10}=1024
+\]
+
+最大値
+
+\[
+2^{10}-1
+\]
+
+\[
+1024-1
+\]
+
+\[
+1023
+\]
+
+</div>
+
+</details>
+
+</div>
+
+
+
+<h2 id="calc">ビット計算ツール</h2>
+
+<div class="calc">
+
+<p>
+
+ビット数を入力すると  
+表現できる数の個数と最大値を計算します。
+
+</p>
+
+<input id="bitInput" type="number" placeholder="ビット数">
+
+<button onclick="calcBits()">計算</button>
+
+<p id="result"></p>
+
+</div>
+
+
+
+<script>
+
+function calcBits(){
+
+let n=document.getElementById("bitInput").value;
+
+let count=Math.pow(2,n);
+
+let max=count-1;
+
+document.getElementById("result").innerHTML=
+
+"表現できる数の個数: "+count+
+"<br>最大値: "+max;
+
+}
+
+</script>
+
+
+
+<h2 id="terms">用語解説</h2>
+
+<div class="box">
+
+<p><b>ビット（bit）</b></p>
+
+<p>
+
+情報の最小単位。  
+0 または 1 のどちらかの値を取る。
+
+</p>
+
+</div>
+
+
+<div class="box">
+
+<p><b>二進数</b></p>
+
+<p>
+
+0 と 1 の2つの数字だけを使う数の表記方法。  
+コンピュータ内部の計算は基本的にすべて二進数で行われる。
+
+</p>
+
+</div>
+
+
+<div class="box">
+
+<p><b>Σ（シグマ）</b></p>
+
+<p>
+
+総和記号。  
+複数の値をすべて足し合わせることを意味する。
+
+</p>
+
+</div>
+
+
+<div class="box">
+
+<p><b>Π（パイ）</b></p>
+
+<p>
+
+総乗記号。  
+複数の値をすべて掛け合わせることを意味する。
+
+</p>
+
+</div>
+
+
+<div class="box">
+
+<p><b>Δ（デルタ）</b></p>
+
+<p>
+
+変化量や差分を表す記号。  
+数学や物理でよく使われる。
+
+</p>
+
+</div>
+
+
+
 </div>
 
 </body>
