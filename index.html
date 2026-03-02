@@ -15,30 +15,25 @@
 
 body{
 margin:0;
-font-family:sans-serif;
-background:#fafafa;
+font-family:serif;
+line-height:1.9;
+background:#ffffff;
 }
 
-.container{
+.layout{
 display:flex;
 max-width:1200px;
 margin:auto;
 }
 
-/* 左目次 */
-
 .sidebar{
-width:260px;
+width:240px;
 padding:30px;
-background:#f2f2f2;
+background:#fafafa;
+border-right:1px solid #ddd;
 height:100vh;
 position:sticky;
 top:0;
-}
-
-.sidebar h2{
-font-size:18px;
-margin-top:0;
 }
 
 .sidebar a{
@@ -48,63 +43,65 @@ text-decoration:none;
 color:#333;
 }
 
-/* 本文 */
-
 .content{
 flex:1;
-padding:40px;
-background:white;
+padding:50px;
+max-width:800px;
 }
 
 h1{
-font-size:34px;
+font-size:36px;
 margin-top:0;
 }
 
 h2{
-margin-top:50px;
-border-bottom:2px solid #ddd;
+margin-top:60px;
+border-bottom:1px solid #ddd;
 padding-bottom:6px;
 }
 
-/* 数式 */
-
 .formula{
 font-size:28px;
-background:#f6f6f6;
-padding:20px;
-border-radius:10px;
-margin:20px 0;
 text-align:center;
+background:#f6f6f6;
+padding:25px;
+border-radius:6px;
+margin:30px 0;
 }
 
-/* 説明 */
-
-.box{
-background:#f8f8f8;
-padding:15px;
-border-radius:8px;
-margin-top:20px;
+.theorem{
+border-left:5px solid #000;
+background:#f9f9f9;
+padding:20px;
+margin:25px 0;
 }
 
-/* 問題 */
+.proof{
+border-left:5px solid #555;
+background:#fcfcfc;
+padding:20px;
+margin:25px 0;
+}
 
-.problem{
+.example{
+border-left:5px solid #2a6;
+background:#f5fff8;
+padding:20px;
+margin:25px 0;
+}
+
+.exercise{
+border-left:5px solid #36c;
 background:#eef4ff;
 padding:20px;
-border-radius:10px;
-margin-top:25px;
+margin:25px 0;
 }
 
 .answer{
 background:#f1fff1;
-padding:20px;
-border-radius:10px;
+padding:15px;
 margin-top:10px;
-}
-
-details{
-margin-top:10px;
+border-radius:6px;
 }
 
 summary{
@@ -113,26 +110,25 @@ font-weight:bold;
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
-<div class="container">
+<div class="layout">
 
 <div class="sidebar">
 
-<h2>目次</h2>
+<b>目次</b>
 
 <a href="#formula">基本式</a>
-<a href="#bit">ビットとは</a>
-<a href="#why">なぜ2^nになるか</a>
-<a href="#max">最大値の理由</a>
-<a href="#example">具体例</a>
+<a href="#definition">定義</a>
+<a href="#theorem">定理</a>
+<a href="#proof">証明</a>
+<a href="#example">例</a>
 <a href="#exercise">演習</a>
 
 </div>
-
 
 
 <div class="content">
@@ -140,215 +136,123 @@ font-weight:bold;
 <h1>コダックの定理</h1>
 
 <p>
-
-コダックの定理とは、ビット数と表現できる整数の範囲の関係を示す基本原理である。
-
+コダックの定理とは、コンピュータで使用されるビット数と表現できる整数の範囲の関係を示す基本原理である。二進数では各桁が0または1のいずれかの値を取り、この桁をビット（bit）と呼ぶ。ビット数が増えるほど表現できる数の範囲は指数的に増加する。
 </p>
-
 
 
 <h2 id="formula">基本式</h2>
 
 <div class="formula">
 
-\[
-2^n
-\]
+[
+\text{表せる数の個数} = 2^n
+]
 
-表せる数の個数
+[
+\text{最大値} = 2^n - 1
+]
 
-<br><br>
+</div>
 
-\[
-2^n - 1
-\]
+<p>
+ここで (n) はビット数を表す。nビットの二進数では、それぞれの桁が独立して0または1を取るため、全体の組み合わせ数は (2^n) 通りになる。
+</p>
 
-最大値
+
+
+<h2 id="definition">定義</h2>
+
+<p>
+コンピュータでは整数は二進数で表現される。二進数とは、0と1の二種類の数字だけを用いる記数法である。1桁の二進数は2通りの状態を持つため、複数の桁を組み合わせると可能な数の組み合わせは指数的に増加する。この性質から、nビットの二進数で表せる整数の個数は (2^n) 個になる。
+</p>
+
+
+
+<h2 id="theorem">定理</h2>
+
+<div class="theorem">
+
+<b>定理1（コダックの定理）</b>
+
+<p>
+nビットの二進数によって表現できる整数の個数は (2^n) 個である。また、整数を0から数え始める場合、その最大値は (2^n - 1) となる。
+</p>
 
 </div>
 
 
 
-<h2 id="bit">ビットとは</h2>
+<h2 id="proof">証明</h2>
+
+<div class="proof">
 
 <p>
-
-コンピュータではすべての情報は  
-0と1の組み合わせで表される。
-
-この1桁を **ビット(bit)** という。
-
+1ビットは0または1の2通りの状態を取る。2ビットの場合はそれぞれの桁が独立に2通りの値を取るため、組み合わせは (2\times2) で4通りになる。同様に3ビットでは (2\times2\times2) で8通りとなる。一般にnビットの場合、各桁が独立に2通りの値を取るため、組み合わせの総数は
 </p>
 
-<div class="box">
+[
+2 \times 2 \times 2 \times \cdots \times 2
+]
 
-1ビット  
-\[
-2
-\] 通り
-
-2ビット  
-\[
-2^2
-\]
-
-3ビット  
-\[
-2^3
-\]
+<p>
+となり、これは指数表記で (2^n) と書ける。さらに整数は0から始まるため、最大値は (2^n-1) となる。□
+</p>
 
 </div>
 
 
 
-<h2 id="why">なぜ \(2^n\) 個になるのか</h2>
+<h2 id="example">例</h2>
+
+<div class="example">
 
 <p>
-
-1ビットは
-
-\[
-2
-\]
-
-通りの状態を持つ。
-
+3ビットの場合、表せる数は次の8通りである。
 </p>
+
+[
+000=0,;001=1,;010=2,;011=3,;100=4,;101=5,;110=6,;111=7
+]
 
 <p>
-
-nビットなら
-
-\[
-2 × 2 × 2 × ... × 2
-\]
-
-となる。
-
+このとき表せる数の個数は (2^3=8)、最大値は (2^3-1=7) となる。
 </p>
-
-<p>
-
-よって
-
-\[
-2^n
-\]
-
-通りになる。
-
-</p>
-
-
-
-<h2 id="max">最大値の理由</h2>
-
-<p>
-
-3ビットの場合
-
-</p>
-
-\[
-000 = 0
-\]
-
-\[
-111 = 7
-\]
-
-<p>
-
-表せる数は
-
-\[
-2^3 = 8
-\]
-
-だが、  
-数は0から始まるため
-
-</p>
-
-\[
-最大値 = 2^3 - 1
-\]
-
-となる。
-
-
-
-
-
-<h2 id="example">具体例</h2>
-
-<p>
-
-8ビットの場合
-
-</p>
-
-<div class="box">
-
-\[
-2^8 = 256
-\]
-
-表せる数の個数
-
-<br><br>
-
-\[
-2^8 - 1 = 255
-\]
-
-最大値
 
 </div>
-
 
 
 
 <h2 id="exercise">演習</h2>
 
-<div class="problem">
+<div class="exercise">
 
-問題  
-4ビットで表せる最大値を求めよ。
-
-</div>
+<p>
+問題：4ビットで表せる最大値を求めよ。
+</p>
 
 <details>
 
-<summary>解答を見る</summary>
+<summary>解答</summary>
 
 <div class="answer">
 
-最大値の式
+<p>
+最大値は式 (2^n-1) を用いて求めることができる。ここで (n=4) なので
+</p>
 
-\[
-2^n - 1
-\]
+[
+2^4-1=16-1=15
+]
 
-n=4
-
-\[
-2^4 = 16
-\]
-
-\[
-16 - 1 = 15
-\]
-
-よって
-
-\[
-15
-\]
+<p>
+したがって答えは15である。
+</p>
 
 </div>
 
 </details>
+
+</div>
 
 
 </div>
