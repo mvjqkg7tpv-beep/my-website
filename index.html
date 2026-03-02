@@ -5,103 +5,85 @@
 
 <title>コダックの定理 | 数学を探究するもの</title>
 
-<meta name="description" content="コダックの定理とは、nビットで表せる数の個数が2^n個、最大値が2^n-1になるという原理を説明するものです。">
-
-<link rel="icon" href="favicon.ico">
-
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
 
 body{
-margin:0;
 font-family:serif;
-line-height:1.9;
-background:#ffffff;
+line-height:2;
+font-size:20px;
+margin:0;
+background:#fff;
 }
 
 .layout{
 display:flex;
-max-width:1200px;
+max-width:1300px;
 margin:auto;
 }
 
 .sidebar{
-width:240px;
+width:260px;
 padding:30px;
 background:#fafafa;
 border-right:1px solid #ddd;
-height:100vh;
 position:sticky;
 top:0;
+height:100vh;
+font-size:18px;
 }
 
 .sidebar a{
 display:block;
-margin:10px 0;
-text-decoration:none;
+margin:12px 0;
 color:#333;
+text-decoration:none;
 }
 
 .content{
 flex:1;
-padding:50px;
-max-width:800px;
+padding:60px;
+max-width:900px;
 }
 
 h1{
-font-size:36px;
-margin-top:0;
+font-size:42px;
 }
 
 h2{
-margin-top:60px;
-border-bottom:1px solid #ddd;
-padding-bottom:6px;
+margin-top:70px;
+border-bottom:2px solid #ddd;
+padding-bottom:8px;
 }
 
 .formula{
-font-size:28px;
+font-size:32px;
 text-align:center;
-background:#f6f6f6;
+background:#f5f5f5;
+padding:30px;
+border-radius:8px;
+margin:40px 0;
+}
+
+.block{
+border-left:6px solid #333;
+background:#f9f9f9;
 padding:25px;
-border-radius:6px;
 margin:30px 0;
 }
 
-.theorem{
-border-left:5px solid #000;
-background:#f9f9f9;
-padding:20px;
-margin:25px 0;
-}
-
-.proof{
-border-left:5px solid #555;
-background:#fcfcfc;
-padding:20px;
-margin:25px 0;
-}
-
-.example{
-border-left:5px solid #2a6;
-background:#f5fff8;
-padding:20px;
-margin:25px 0;
-}
-
 .exercise{
-border-left:5px solid #36c;
 background:#eef4ff;
-padding:20px;
-margin:25px 0;
+padding:25px;
+border-radius:8px;
+margin-top:30px;
 }
 
 .answer{
-background:#f1fff1;
-padding:15px;
-margin-top:10px;
-border-radius:6px;
+background:#f0fff0;
+padding:20px;
+margin-top:15px;
 }
 
 summary{
@@ -122,6 +104,7 @@ font-weight:bold;
 <b>目次</b>
 
 <a href="#formula">基本式</a>
+<a href="#idea">直感</a>
 <a href="#definition">定義</a>
 <a href="#theorem">定理</a>
 <a href="#proof">証明</a>
@@ -135,47 +118,107 @@ font-weight:bold;
 
 <h1>コダックの定理</h1>
 
-<p>
-コダックの定理とは、コンピュータで使用されるビット数と表現できる整数の範囲の関係を示す基本原理である。二進数では各桁が0または1のいずれかの値を取り、この桁をビット（bit）と呼ぶ。ビット数が増えるほど表現できる数の範囲は指数的に増加する。
-</p>
-
 
 <h2 id="formula">基本式</h2>
 
 <div class="formula">
 
 [
-\text{表せる数の個数} = 2^n
+\sum_{i=0}^{n-1}2^i = 2^n - 1
 ]
 
 [
-\text{最大値} = 2^n - 1
+|{0,1}^n| = 2^n
+]
+
+[
+\Delta_{\max}=2^n-1
 ]
 
 </div>
 
 <p>
-ここで (n) はビット数を表す。nビットの二進数では、それぞれの桁が独立して0または1を取るため、全体の組み合わせ数は (2^n) 通りになる。
+nビットの二進数では、それぞれの桁が0または1のどちらかを取る。  
+したがって可能な組み合わせ数は指数関数的に増加する。
 </p>
+
+
+
+<h2 id="idea">直感</h2>
+
+<p>
+1ビットなら0か1の2通り。  
+2ビットなら00,01,10,11の4通り。  
+3ビットなら8通り。  
+
+つまりビットが1つ増えるごとに可能な状態は2倍になる。
+</p>
+
+[
+2 \times 2 \times 2 \times \cdots = 2^n
+]
 
 
 
 <h2 id="definition">定義</h2>
 
+<div class="block">
+
 <p>
-コンピュータでは整数は二進数で表現される。二進数とは、0と1の二種類の数字だけを用いる記数法である。1桁の二進数は2通りの状態を持つため、複数の桁を組み合わせると可能な数の組み合わせは指数的に増加する。この性質から、nビットの二進数で表せる整数の個数は (2^n) 個になる。
+
+nビットの二進数とは、  
+n個のビット
+
+[
+b_0,b_1,b_2,\dots,b_{n-1}
+]
+
+から構成される数である。
+
 </p>
+
+<p>
+
+このとき値は
+
+[
+\sum_{i=0}^{n-1} b_i 2^i
+]
+
+で表される。
+
+</p>
+
+</div>
 
 
 
 <h2 id="theorem">定理</h2>
 
-<div class="theorem">
-
-<b>定理1（コダックの定理）</b>
+<div class="block">
 
 <p>
-nビットの二進数によって表現できる整数の個数は (2^n) 個である。また、整数を0から数え始める場合、その最大値は (2^n - 1) となる。
+
+nビットの二進数で表せる整数の個数は
+
+[
+2^n
+]
+
+である。
+
+</p>
+
+<p>
+
+また最大値は
+
+[
+2^n-1
+]
+
+となる。
+
 </p>
 
 </div>
@@ -184,18 +227,62 @@ nビットの二進数によって表現できる整数の個数は (2^n) 個で
 
 <h2 id="proof">証明</h2>
 
-<div class="proof">
+<div class="block">
 
 <p>
-1ビットは0または1の2通りの状態を取る。2ビットの場合はそれぞれの桁が独立に2通りの値を取るため、組み合わせは (2\times2) で4通りになる。同様に3ビットでは (2\times2\times2) で8通りとなる。一般にnビットの場合、各桁が独立に2通りの値を取るため、組み合わせの総数は
+
+各ビットは
+
+[
+b_i \in {0,1}
+]
+
+を取る。
+
+</p>
+
+<p>
+
+したがって組み合わせ数は
+
+[
+2 \times 2 \times \cdots \times 2
+]
+
+であり
+
+[
+2^n
+]
+
+となる。
+
+</p>
+
+<p>
+
+さらに最大値は
+
 </p>
 
 [
-2 \times 2 \times 2 \times \cdots \times 2
+\sum_{i=0}^{n-1}2^i
 ]
 
 <p>
-となり、これは指数表記で (2^n) と書ける。さらに整数は0から始まるため、最大値は (2^n-1) となる。□
+
+であり、等比数列の和から
+
+</p>
+
+[
+\sum_{i=0}^{n-1}2^i = 2^n-1
+]
+
+<p>
+
+が成立する。
+
 </p>
 
 </div>
@@ -204,21 +291,39 @@ nビットの二進数によって表現できる整数の個数は (2^n) 個で
 
 <h2 id="example">例</h2>
 
-<div class="example">
-
 <p>
-3ビットの場合、表せる数は次の8通りである。
+
+3ビットの場合
+
 </p>
 
 [
-000=0,;001=1,;010=2,;011=3,;100=4,;101=5,;110=6,;111=7
+000,001,010,011,100,101,110,111
 ]
 
 <p>
-このとき表せる数の個数は (2^3=8)、最大値は (2^3-1=7) となる。
+
+合計
+
+[
+2^3 = 8
+]
+
+通り存在する。
+
 </p>
 
-</div>
+<p>
+
+最大値は
+
+[
+111_2 = 7
+]
+
+である。
+
+</p>
 
 
 
@@ -227,7 +332,10 @@ nビットの二進数によって表現できる整数の個数は (2^n) 個で
 <div class="exercise">
 
 <p>
-問題：4ビットで表せる最大値を求めよ。
+
+問1：  
+8ビットで表せる整数の最大値を求めよ。
+
 </p>
 
 <details>
@@ -236,17 +344,13 @@ nビットの二進数によって表現できる整数の個数は (2^n) 個で
 
 <div class="answer">
 
-<p>
-最大値は式 (2^n-1) を用いて求めることができる。ここで (n=4) なので
-</p>
-
 [
-2^4-1=16-1=15
+2^8-1
 ]
 
-<p>
-したがって答えは15である。
-</p>
+[
+256-1=255
+]
 
 </div>
 
